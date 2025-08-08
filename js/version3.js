@@ -325,6 +325,7 @@ class PortfolioApp {
             // Initialize other components
             this.initNavigation();
             this.initScrollEffects();
+            this.initProcessComponent();
 
             // Hide loading after everything is ready
             setTimeout(() => {
@@ -430,6 +431,217 @@ class PortfolioApp {
         // Observe elements for scroll animations
         const animatedElements = document.querySelectorAll('.about-text-content, .about-visual-content');
         animatedElements.forEach(el => observer.observe(el));
+    }
+
+    initProcessComponent() {
+        const stageContainer = document.getElementById('stageContainer');
+        if (!stageContainer) return;
+
+        const cards = Array.from(document.querySelectorAll('#process .stage-card'));
+        const totalCards = cards.length;
+        const navDots = Array.from(document.querySelectorAll('#process .nav-dot'));
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const miniCardsDesktop = Array.from(document.querySelectorAll('#process #miniCardsDesktop .mini-card'));
+        const miniCardsTablet = Array.from(document.querySelectorAll('#process #miniCardsTablet .mini-card'));
+
+        let currentIndex = 0;
+        let isAnimating = false;
+        let autoAdvanceInterval;
+
+        const keyboardGuide = document.querySelector('#process .keyboard-guide');
+        setTimeout(() => {
+            if (keyboardGuide) {
+                gsap.to(keyboardGuide, {
+                    opacity: 0,
+                    duration: 1,
+                    delay: 8,
+                    onComplete: () => {
+                        keyboardGuide.style.display = 'none';
+                    }
+                });
+            }
+        }, 5000);
+
+        function initializeCards() {
+            cards.forEach((card, index) => {
+                const offset = index - currentIndex;
+                positionCard(card, offset);
+            });
+        }
+
+        function positionCard(card, offset) {
+            if (offset === 0) {
+                gsap.set(card, { y: 0, z: 100, rotationX: 0, rotationY: 0, scale: 1, opacity: 1, zIndex: totalCards });
+            } else if (offset < 0) {
+                gsap.set(card, { y: offset * -30, z: offset * 20, rotationX: offset * 5, rotationY: 0, scale: 1 + (offset * 0.05), opacity: 0.7 + (offset * 0.1), zIndex: totalCards + offset });
+            } else {
+                gsap.set(card, { y: offset * 30, z: offset * -20, rotationX: offset * -5, rotationY: 0, scale: 1 - (offset * 0.05), opacity: 0.7 - (offset * 0.1), zIndex: totalCards - offset });
+            }
+        }
+
+        function goToCard(newIndex) {
+            if (isAnimating || newIndex === currentIndex) return;
+            if (newIndex < 0 || newIndex >= totalCards) return;
+
+            isAnimating = true;
+
+            navDots.forEach((dot, i) => dot.classList.toggle('active', i === newIndex));
+            miniCardsDesktop.forEach((card, i) => card.classList.toggle('active', i === newIndex));
+            miniCardsTablet.forEach((card, i) => card.classList.toggle('active', i === newIndex));
+
+            const direction = newIndex > currentIndex ? 1 : -1;
+            const currentCard = cards[currentIndex];
+
+            gsap.to(currentCard, { y: direction > 0 ? -60 : 60, z: direction > 0 ? 20 : -20, rotationX: direction > 0 ? 10 : -10, opacity: 0.7, scale: 0.95, duration: 0.5, ease: "power2.inOut" });
+
+            const newCard = cards[newIndex];
+            gsap.fromTo(newCard,
+                { y: direction > 0 ? 60 : -60, z: direction > 0 ? -20 : 20, rotationX: direction > 0 ? -10 : 10, opacity: 0.7, scale: 0.95 },
+                { y: 0, z: 100, rotationX: 0, rotationY: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power2.inOut", delay: 0.1 }
+            );
+
+            cards.forEach((card, index) => {
+                if (index !== currentIndex && index !== newIndex) {
+                    const offset = index - newIndex;
+                    gsap.to(card, {
+                        y: offset < 0 ? offset * -30 : offset * 30,
+                        z: offset < 0 ? offset * 20 : offset * -20,
+                        rotationX: offset < 0 ? offset * 5 : offset * -5,
+                        rotationY: 0,
+                        scale: offset < 0 ? 1 + (offset * 0.05) : 1 - (offset * 0.05),
+                        opacity: offset < 0 ? 0.7 + (offset * 0.1) : 0.7 - (offset * 0.1),
+                        zIndex: offset < 0 ? totalCards + offset : totalCards - offset,
+                        duration: 0.5,
+                        ease: "power2.inOut",
+                        delay: 0.1
+                    });
+                }
+            });
+
+            currentIndex = newIndex;
+            setTimeout(() => { isAnimating = false; }, 600);
+        }
+
+        function resetAutoAdvance() {
+            clearInterval(autoAdvanceInterval);
+            startAutoAdvance();
+        }
+
+        navDots.forEach((dot, index) => dot.addEventListener('click', () => { goToCard(index); resetAutoAdvance(); }));
+        prevButton?.addEventListener('click', () => { goToCard(Math.max(0, currentIndex - 1)); resetAutoAdvance(); });
+        nextButton?.addEventListener('click', () => { goToCard(Math.min(totalCards - 1, currentIndex + 1)); resetAutoAdvance(); });
+        miniCardsDesktop.forEach((card, index) => card.addEventListener('click', () => { goToCard(index); resetAutoAdvance(); }));
+        miniCardsTablet.forEach((card, index) => card.addEventListener('click', () => { goToCard(index); resetAutoAdvance(); }));
+
+        initializeCards();
+
+        function createCardPattern(canvasId, color, patternType) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.clientWidth;
+            const height = canvas.height = canvas.clientHeight;
+            ctx.clearRect(0, 0, width, height);
+        }
+
+        createCardPattern('pattern1', '#ffffff', 'circles');
+        createCardPattern('pattern2', '#ffffff', 'grid');
+        createCardPattern('pattern3', '#ffffff', 'dots');
+        createCardPattern('pattern4', '#ffffff', 'zigzag');
+        createCardPattern('pattern5', '#ffffff', 'triangles');
+
+        const particlesContainer = document.querySelector('#process .particles-container');
+        function createParticles() {
+            if (!particlesContainer) return;
+            const particleCount = 100;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                particle.style.left = `${x}%`;
+                particle.style.top = `${y}%`;
+                const size = Math.random() * 8 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.opacity = Math.random() * 0.3;
+                const duration = Math.random() * 100 + 50;
+                particle.style.animation = `float ${duration}s infinite linear`;
+                particle.style.animationDelay = `-${Math.random() * 100}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        function startAutoAdvance() {
+            if (autoAdvanceInterval) clearInterval(autoAdvanceInterval);
+            autoAdvanceInterval = setInterval(() => {
+                if (!document.hidden && !isAnimating) {
+                    const nextIndex = (currentIndex + 1) % totalCards;
+                    goToCard(nextIndex);
+                }
+            }, 8000);
+        }
+
+        startAutoAdvance();
+
+        document.addEventListener('mousemove', (e) => {
+            if (isAnimating) return;
+            const xPos = (e.clientX / window.innerWidth) - 0.5;
+            const yPos = (e.clientY / window.innerHeight) - 0.5;
+            const currentCard = cards[currentIndex];
+            gsap.to(currentCard, { rotationY: xPos * 5, rotationX: -yPos * 5, duration: 0.5, ease: "power2.out" });
+        });
+
+        let touchStartY = 0;
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+            touchStartX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            const touchEndY = e.changedTouches[0].clientY;
+            const touchEndX = e.changedTouches[0].clientX;
+            const deltaY = touchEndY - touchStartY;
+            const deltaX = touchEndX - touchStartX;
+
+            if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 50) {
+                goToCard(deltaY < 0 ? Math.min(totalCards - 1, currentIndex + 1) : Math.max(0, currentIndex - 1));
+                resetAutoAdvance();
+            } else if (Math.abs(deltaX) > 100) {
+                goToCard(deltaX < 0 ? Math.min(totalCards - 1, currentIndex + 1) : Math.max(0, currentIndex - 1));
+                resetAutoAdvance();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goToCard(Math.max(0, currentIndex - 1));
+                resetAutoAdvance();
+            } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                goToCard(Math.min(totalCards - 1, currentIndex + 1));
+                resetAutoAdvance();
+            } else if (e.key >= '1' && e.key <= '5') {
+                e.preventDefault();
+                const targetIndex = parseInt(e.key) - 1;
+                if (targetIndex >= 0 && targetIndex < totalCards) {
+                    goToCard(targetIndex);
+                    resetAutoAdvance();
+                }
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            createCardPattern('pattern1', '#ffffff', 'circles');
+            createCardPattern('pattern2', '#ffffff', 'grid');
+            createCardPattern('pattern3', '#ffffff', 'dots');
+            createCardPattern('pattern4', '#ffffff', 'zigzag');
+            createCardPattern('pattern5', '#ffffff', 'triangles');
+        });
     }
 }
 
