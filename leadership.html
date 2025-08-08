@@ -27,7 +27,18 @@
         .pricing-card.featured { border-color: var(--yellow); border-width: 2px; }
     </style>
 </head>
-<body style="background-image: url('https://i.imgur.com/fvQaqAQ.jpeg'); background-size: cover; background-position: center; background-attachment: fixed;">
+<body style="background-image: url('https://i.imgur.com/fvQaqAQ.jpeg');  background-size: contain;  background-repeat: no-repeat;  background-position: calc(50% + 350px) center;  background-attachment: fixed;  position: relative;  margin: 0;">
+
+<!-- White → transparent overlay -->
+<div style="
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+  pointer-events: none;
+"></div>
 
     <header id="page-header" role="banner">
         <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50" role="navigation">
