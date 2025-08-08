@@ -41,9 +41,30 @@
         .nav-link.active { color: var(--primary) !important; font-weight: 500; position: relative; }
         .nav-link.active::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 1px; background: var(--yellow); }
         .container-centered { width: 100%; max-width: 1400px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+
+        #interactive-image-container {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 50%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 0;
+        }
+        #interactive-image {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 100%;
+            width: auto;
+            transition: transform 0.1s ease-out;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900 antialiased">
+    <div id="interactive-image-container">
+        <img id="interactive-image" src="https://raw.githubusercontent.com/NATHANSTOWER/website/main/images/edited-torso40percent.png" alt="Nathan Stower">
+    </div>
     <header id="page-header" role="banner">
         <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50" role="navigation">
             <div class="container-centered py-5 flex items-center justify-between">
@@ -147,5 +168,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/interactive-image.js"></script>
 </body>
 </html>
