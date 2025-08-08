@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nathan Stower - Strategic Business Consultant</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Three.js & GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.min.js"></script>
+
+    <link rel="stylesheet" href="styles-v3.css">
+</head>
+
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Initializing Experience</div>
+    </div>
+
+    <!-- Cosmic Background -->
+    <div class="cosmic-background"></div>
+
+    <!-- Rubik's Cube Background -->
+    <div class="rubiks-background">
+        <canvas id="rubiks-canvas"></canvas>
+    </div>
+
+    <!-- Rubik's Controls -->
+    <div class="rubiks-controls-overlay">
+        <div class="rubiks-controls-title">Cube Controls</div>
+        <button class="rubiks-btn" id="scrambleBtn">
+            <i class="fas fa-random"></i> Scramble
+        </button>
+        <button class="rubiks-btn" id="resetBtn">
+            <i class="fas fa-undo"></i> Reset
+        </button>
+        <div class="rubiks-toggle">
+            <span>Auto Mode</span>
+            <div class="toggle-switch active" id="autoToggle">
+                <div class="toggle-slider"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-brand">Nathan Stower</a>
+            <ul class="nav-menu">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Scroll Container -->
+    <div id="scroll-container">
+        <!-- Hero Section -->
+        <section class="hero-section content-section" id="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-tagline">Strategic Business Consultant</div>
+                    <h1 class="hero-title">Transforming Complex Challenges Into Strategic Solutions</h1>
+                    <p class="hero-description">
+                        I help organizations navigate complexity, optimize operations, and drive sustainable growth
+                        through data-driven insights and strategic thinking.
+                    </p>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Projects Delivered</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">$50M+</div>
+                            <div class="stat-label">Value Created</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a href="#about" class="cta-button primary">
+                            <span>Explore My Work</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#contact" class="cta-button secondary">
+                            <span>Start a Conversation</span>
+                            <i class="fas fa-comments"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section content-section" id="about">
+            <div class="about-content">
+                <div class="about-text-content">
+                    <h2 class="about-title">Strategic Problem Solving</h2>
+                    <p class="about-subtitle">Turning complexity into clarity through systematic thinking</p>
+                    <p class="about-text">
+                        With over 15 years of experience in strategic consulting, I specialize in helping
+                        organizations cut through complexity to find elegant, practical solutions. My approach
+                        combines deep analytical thinking with human-centered design principles.
+                    </p>
+                    <p class="about-text">
+                        I believe that the best solutions are not just technically sound, but also consider
+                        the human elements—how people work, think, and adapt to change. This philosophy
+                        drives everything I do, from process optimization to strategic planning.
+                    </p>
+
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="feature-title">Data-Driven Insights</h3>
+                            <p class="feature-description">
+                                Transforming raw data into actionable intelligence that drives decision-making
+                            </p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3 class="feature-title">Process Optimization</h3>
+                            <p class="feature-description">
+                                Streamlining operations to eliminate waste and maximize efficiency
+                            </p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3 class="feature-title">Strategic Innovation</h3>
+                            <p class="feature-description">
+                                Developing forward-thinking strategies that create competitive advantage
+                            </p>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="feature-title">Change Leadership</h3>
+                            <p class="feature-description">
+                                Guiding organizations through transformation with human-centered approaches
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-visual-content">
+                    <div class="glass-panel animate-float" style="padding: var(--space-3xl); text-align: center;">
+                        <h3 class="text-gradient" style="font-size: var(--text-3xl); margin-bottom: var(--space-xl);">
+                            My Philosophy
+                        </h3>
+                        <div style="font-size: var(--text-lg); color: var(--gray-300); line-height: 1.8; margin-bottom: var(--space-xl);">
+                            "Every complex problem contains within it the seeds of an elegant solution.
+                            The key is knowing how to look."
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); margin-top: var(--space-xl);">
+                            <div style="text-align: center;">
+                                <div style="font-size: var(--text-3xl); font-weight: 900; color: var(--accent); margin-bottom: var(--space-sm);">98%</div>
+                                <div style="font-size: var(--text-sm); color: var(--gray-400);">Client Satisfaction</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: var(--text-3xl); font-weight: 900; color: var(--accent); margin-bottom: var(--space-sm);">3.2x</div>
+                                <div style="font-size: var(--text-sm); color: var(--gray-400);">Average ROI</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section (placeholder for expansion) -->
+        <section class="content-section" id="services" style="padding: var(--space-6xl) var(--space-2xl);">
+            <div style="max-width: 1400px; margin: 0 auto; text-align: center;">
+                <h2 style="font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl)); margin-bottom: var(--space-3xl);">
+                    Strategic Services
+                </h2>
+                <p style="font-size: var(--text-xl); color: var(--gray-300); max-width: 600px; margin: 0 auto var(--space-4xl);">
+                    Comprehensive solutions designed to transform your business challenges into competitive advantages.
+                </p>
+                <div class="glass-panel" style="padding: var(--space-4xl); background: var(--glass-bg);">
+                    <p style="font-size: var(--text-lg); color: var(--gray-300);">
+                        Detailed service offerings coming soon. Contact me to discuss your specific needs.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="content-section" id="contact" style="padding: var(--space-6xl) var(--space-2xl); background: var(--glass-bg); backdrop-filter: blur(20px);">
+            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+                <h2 style="font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl)); margin-bottom: var(--space-xl);">
+                    Let's Transform Your Business
+                </h2>
+                <p style="font-size: var(--text-xl); color: var(--gray-300); margin-bottom: var(--space-4xl); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Ready to turn your complex challenges into strategic advantages? Let's start the conversation.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
+                    <div class="glass-panel" style="padding: var(--space-2xl); text-align: left;">
+                        <div style="display: flex; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-lg);">
+                            <div style="width: 60px; height: 60px; background: var(--gradient-accent); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: var(--text-xl);">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h3 style="color: var(--white); margin-bottom: var(--space-xs);">Email</h3>
+                                <p style="color: var(--gray-400); margin: 0;">nathan@strategicsolutions.com</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--gray-300); font-size: var(--text-sm); margin: 0;">
+                            Drop me a line for project inquiries or strategic discussions.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel" style="padding: var(--space-2xl); text-align: left;">
+                        <div style="display: flex; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-lg);">
+                            <div style="width: 60px; height: 60px; background: var(--gradient-accent); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: var(--text-xl);">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div>
+                                <h3 style="color: var(--white); margin-bottom: var(--space-xs);">Schedule</h3>
+                                <p style="color: var(--gray-400); margin: 0;">Book a consultation</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--gray-300); font-size: var(--text-sm); margin: 0;">
+                            Let's schedule a strategic conversation about your challenges.
+                        </p>
+                    </div>
+                </div>
+
+                <a href="mailto:nathan@strategicsolutions.com" class="cta-button primary" style="font-size: var(--text-xl); padding: var(--space-xl) var(--space-3xl);">
+                    <span>Start the Conversation</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/version3.js"></script>
+</body>
+</html>
