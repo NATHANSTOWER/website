@@ -2,103 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nathan Stower - Strategic Business Consultant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Marketing Sprints | High-Intensity Growth Campaigns</title>
+
+    <!-- Meta Tags -->
+    <meta name="description" content="Intensive, results-driven marketing sprints designed to achieve your business goals in record time. From brand launches to growth hacking, we deliver maximum impact.">
+    <meta name="keywords" content="marketing sprints, agile marketing, growth hacking, product launch, brand strategy, content sprint, lead generation, high-intensity marketing">
+    <meta name="author" content="Nathan Stower">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='gFavicon' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23F59E0B;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23EC4899;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='url(%23gFavicon)'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Space Grotesk, sans-serif' font-size='55' font-weight='bold' fill='%230A0F29'%3EMS%3C/text%3E%3C/svg%3E">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Three.js & GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
 
     <link rel="stylesheet" href="styles-v3.css">
 </head>
+<body class="bg-sd-bg-primary text-sd-text-primary antialiased">
 
-<body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-overlay" id="loading-overlay">
         <div class="loading-spinner"></div>
-        <div class="loading-text">Initializing Experience</div>
+        <div class="loading-text">Loading Marketing Sprints...</div>
     </div>
 
-    <!-- Cosmic Background -->
-    <div class="cosmic-background"></div>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Rubik's Cube Background -->
-    <div class="rubiks-background">
-        <canvas id="rubiks-canvas"></canvas>
-    </div>
-
-    <!-- Rubik's Controls -->
-    <div class="rubiks-controls-overlay">
-        <div class="rubiks-controls-title">Cube Controls</div>
-        <button class="rubiks-btn" id="scrambleBtn">
-            <i class="fas fa-random"></i> Scramble
-        </button>
-        <button class="rubiks-btn" id="resetBtn">
-            <i class="fas fa-undo"></i> Reset
-        </button>
-        <div class="rubiks-toggle">
-            <span>Auto Mode</span>
-            <div class="toggle-switch active" id="autoToggle">
-                <div class="toggle-slider"></div>
-            </div>
+    <header class="main-nav fixed top-0 left-0 right-0 z-50 py-4" id="main-header">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between h-full">
+                <a href="#hero" class="logo-link flex items-center gap-3 text-sd-text-primary hover:text-sd-accent-teal transition-colors">
+                    <span class="font-heading font-bold text-2xl">Marketing Sprints</span>
+                </a>
+                <nav class="hidden lg:flex items-center" aria-label="Main navigation">
+                    <ul class="flex space-x-8 mr-6">
+                        <li><a href="#hero" class="nav-link">Home</a></li>
+                        <li><a href="#sprint-process" class="nav-link">Process</a></li>
+                        <li><a href="#sprint-types" class="nav-link">Sprint Types</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                    <a href="#contact" class="cta-button-nav">Book a Sprint</a>
+                </nav>
+            </nav>
         </div>
-    </div>
+    </header>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#hero" class="nav-brand">Nathan Stower</a>
-            <ul class="nav-menu">
-                <li><a href="#hero" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Scroll Container -->
-    <div id="scroll-container">
-        <!-- Hero Section -->
-        <section class="hero-section content-section" id="hero">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <div class="hero-tagline">Strategic Business Consultant</div>
-                    <h1 class="hero-title">Transforming Complex Challenges Into Strategic Solutions</h1>
+    <main id="main-content">
+        <section id="hero" class="hero-section relative min-h-screen flex items-center overflow-hidden">
+            <div class="container mx-auto px-4">
+                <div class="hero-content text-center">
+                    <div class="hero-tagline">High-Intensity Marketing Campaigns</div>
+                    <h1 class="hero-title">Achieve Your Goals in Weeks, Not Years.</h1>
                     <p class="hero-description">
-                        I help organizations navigate complexity, optimize operations, and drive sustainable growth
-                        through data-driven insights and strategic thinking.
+                        Our Marketing Sprints are focused, high-intensity campaigns designed to deliver maximum impact in a short period. We help you launch, grow, and innovate faster.
                     </p>
-
                     <div class="hero-stats">
                         <div class="stat-item">
-                            <div class="stat-number">15+</div>
-                            <div class="stat-label">Years Experience</div>
+                            <div class="stat-number">2-6</div>
+                            <div class="stat-label">Weeks per Sprint</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">200+</div>
-                            <div class="stat-label">Projects Delivered</div>
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Sprints Launched</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">$50M+</div>
-                            <div class="stat-label">Value Created</div>
+                            <div class="stat-number">300%</div>
+                            <div class="stat-label">Avg. ROI</div>
                         </div>
                     </div>
-
                     <div class="hero-actions">
-                        <a href="#about" class="cta-button primary">
-                            <span>Explore My Work</span>
+                        <a href="#sprint-types" class="cta-button primary">
+                            <span>Explore Sprint Types</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                         <a href="#contact" class="cta-button secondary">
-                            <span>Start a Conversation</span>
+                            <span>Book a Discovery Call</span>
                             <i class="fas fa-comments"></i>
                         </a>
                     </div>
@@ -106,153 +90,77 @@
             </div>
         </section>
 
-        <!-- About Section -->
-        <section class="about-section content-section" id="about">
-            <div class="about-content">
-                <div class="about-text-content">
-                    <h2 class="about-title">Strategic Problem Solving</h2>
-                    <p class="about-subtitle">Turning complexity into clarity through systematic thinking</p>
-                    <p class="about-text">
-                        With over 15 years of experience in strategic consulting, I specialize in helping
-                        organizations cut through complexity to find elegant, practical solutions. My approach
-                        combines deep analytical thinking with human-centered design principles.
+        <section id="sprint-process" class="section bg-sd-bg-secondary ux-process-card-section relative">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-sd-text-primary">The Marketing Sprint Process</h2>
+                    <p class="mt-4 max-w-2xl text-xl text-sd-text-secondary mx-auto">
+                        Our agile, five-stage process ensures we deliver measurable results, fast.
                     </p>
-                    <p class="about-text">
-                        I believe that the best solutions are not just technically sound, but also consider
-                        the human elements—how people work, think, and adapt to change. This philosophy
-                        drives everything I do, from process optimization to strategic planning.
-                    </p>
-
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h3 class="feature-title">Data-Driven Insights</h3>
-                            <p class="feature-description">
-                                Transforming raw data into actionable intelligence that drives decision-making
-                            </p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <h3 class="feature-title">Process Optimization</h3>
-                            <p class="feature-description">
-                                Streamlining operations to eliminate waste and maximize efficiency
-                            </p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <h3 class="feature-title">Strategic Innovation</h3>
-                            <p class="feature-description">
-                                Developing forward-thinking strategies that create competitive advantage
-                            </p>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3 class="feature-title">Change Leadership</h3>
-                            <p class="feature-description">
-                                Guiding organizations through transformation with human-centered approaches
-                            </p>
-                        </div>
-                    </div>
                 </div>
-
-                <div class="about-visual-content">
-                    <div class="glass-panel animate-float" style="padding: var(--space-3xl); text-align: center;">
-                        <h3 class="text-gradient" style="font-size: var(--text-3xl); margin-bottom: var(--space-xl);">
-                            My Philosophy
-                        </h3>
-                        <div style="font-size: var(--text-lg); color: var(--gray-300); line-height: 1.8; margin-bottom: var(--space-xl);">
-                            "Every complex problem contains within it the seeds of an elegant solution.
-                            The key is knowing how to look."
-                        </div>
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); margin-top: var(--space-xl);">
-                            <div style="text-align: center;">
-                                <div style="font-size: var(--text-3xl); font-weight: 900; color: var(--accent); margin-bottom: var(--space-sm);">98%</div>
-                                <div style="font-size: var(--text-sm); color: var(--gray-400);">Client Satisfaction</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: var(--text-3xl); font-weight: 900; color: var(--accent); margin-bottom: var(--space-sm);">3.2x</div>
-                                <div style="font-size: var(--text-sm); color: var(--gray-400);">Average ROI</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="stage-container" id="stageContainer">
+                    <!-- Stages will be populated here -->
                 </div>
             </div>
         </section>
 
-        <!-- Services Section (placeholder for expansion) -->
-        <section class="content-section" id="services" style="padding: var(--space-6xl) var(--space-2xl);">
-            <div style="max-width: 1400px; margin: 0 auto; text-align: center;">
-                <h2 style="font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl)); margin-bottom: var(--space-3xl);">
-                    Strategic Services
-                </h2>
-                <p style="font-size: var(--text-xl); color: var(--gray-300); max-width: 600px; margin: 0 auto var(--space-4xl);">
-                    Comprehensive solutions designed to transform your business challenges into competitive advantages.
-                </p>
-                <div class="glass-panel" style="padding: var(--space-4xl); background: var(--glass-bg);">
-                    <p style="font-size: var(--text-lg); color: var(--gray-300);">
-                        Detailed service offerings coming soon. Contact me to discuss your specific needs.
+        <section id="sprint-types" class="section bg-sd-bg-primary">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-sd-text-primary">Types of Marketing Sprints</h2>
+                    <p class="mt-4 max-w-2xl text-xl text-sd-text-secondary mx-auto">
+                        We offer a range of focused sprints to meet your specific business goals.
                     </p>
                 </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <article class="service-card-custom">
+                        <h3 class="font-heading text-2xl font-semibold mb-3 text-sd-text-primary">Brand Launch Sprint</h3>
+                        <p class="text-sd-text-tertiary mb-4 flex-grow">A 4-week sprint to launch your new brand with a bang. We'll handle everything from messaging to media outreach.</p>
+                    </article>
+                    <article class="service-card-custom">
+                        <h3 class="font-heading text-2xl font-semibold mb-3 text-sd-text-primary">Growth Hacking Sprint</h3>
+                        <p class="text-sd-text-tertiary mb-4 flex-grow">A 2-week, high-intensity sprint to identify and execute on the most effective growth channels for your business.</p>
+                    </article>
+                    <article class="service-card-custom">
+                        <h3 class="font-heading text-2xl font-semibold mb-3 text-sd-text-primary">Content Creation Sprint</h3>
+                        <p class="text-sd-text-tertiary mb-4 flex-grow">A 3-week sprint to produce a batch of high-quality, SEO-optimized content to fuel your marketing funnel.</p>
+                    </article>
+                </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="content-section" id="contact" style="padding: var(--space-6xl) var(--space-2xl); background: var(--glass-bg); backdrop-filter: blur(20px);">
-            <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
-                <h2 style="font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl)); margin-bottom: var(--space-xl);">
-                    Let's Transform Your Business
-                </h2>
-                <p style="font-size: var(--text-xl); color: var(--gray-300); margin-bottom: var(--space-4xl); max-width: 600px; margin-left: auto; margin-right: auto;">
-                    Ready to turn your complex challenges into strategic advantages? Let's start the conversation.
-                </p>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-3xl); margin-bottom: var(--space-4xl);">
-                    <div class="glass-panel" style="padding: var(--space-2xl); text-align: left;">
-                        <div style="display: flex; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-lg);">
-                            <div style="width: 60px; height: 60px; background: var(--gradient-accent); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: var(--text-xl);">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h3 style="color: var(--white); margin-bottom: var(--space-xs);">Email</h3>
-                                <p style="color: var(--gray-400); margin: 0;">nathan@strategicsolutions.com</p>
-                            </div>
+        <section id="contact" class="section bg-sd-bg-secondary contact-section">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-sd-text-primary">Ready to Sprint?</h2>
+                    <p class="mt-4 max-w-2xl text-xl text-sd-text-secondary mx-auto">
+                        Let's discuss your goals and how a marketing sprint can help you achieve them.
+                    </p>
+                </div>
+                <div class="max-w-xl mx-auto">
+                    <div id="synergy-contact-form" class="space-y-6">
+                        <div>
+                            <label for="contact-name" class="block text-sm font-medium text-sd-text-secondary mb-1">Full Name</label>
+                            <input type="text" id="contact-name" name="name" class="w-full px-4 py-3 bg-sd-bg-element border border-sd-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-sd-accent-teal text-sd-text-primary" required>
                         </div>
-                        <p style="color: var(--gray-300); font-size: var(--text-sm); margin: 0;">
-                            Drop me a line for project inquiries or strategic discussions.
-                        </p>
-                    </div>
-
-                    <div class="glass-panel" style="padding: var(--space-2xl); text-align: left;">
-                        <div style="display: flex; align-items: center; gap: var(--space-lg); margin-bottom: var(--space-lg);">
-                            <div style="width: 60px; height: 60px; background: var(--gradient-accent); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: var(--text-xl);">
-                                <i class="fas fa-calendar"></i>
-                            </div>
-                            <div>
-                                <h3 style="color: var(--white); margin-bottom: var(--space-xs);">Schedule</h3>
-                                <p style="color: var(--gray-400); margin: 0;">Book a consultation</p>
-                            </div>
+                        <div>
+                            <label for="contact-email" class="block text-sm font-medium text-sd-text-secondary mb-1">Email Address</label>
+                            <input type="email" id="contact-email" name="email" class="w-full px-4 py-3 bg-sd-bg-element border border-sd-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-sd-accent-teal text-sd-text-primary" required>
                         </div>
-                        <p style="color: var(--gray-300); font-size: var(--text-sm); margin: 0;">
-                            Let's schedule a strategic conversation about your challenges.
-                        </p>
+                        <button type="button" id="contact-submit" class="btn btn-primary text-lg px-8 py-3 w-full">Book Discovery Call</button>
                     </div>
                 </div>
-
-                <a href="mailto:nathan@strategicsolutions.com" class="cta-button primary" style="font-size: var(--text-xl); padding: var(--space-xl) var(--space-3xl);">
-                    <span>Start the Conversation</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
             </div>
         </section>
-    </div>
+    </main>
+
+    <footer class="footer bg-sd-bg-primary py-16 border-t border-sd-border-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center text-sd-text-tertiary text-sm pt-8 border-t border-sd-border-light">
+                &copy; <span id="current-year"></span> Marketing Sprints by Nathan Stower.
+            </div>
+        </div>
+    </footer>
 
     <script src="js/version3.js"></script>
 </body>
