@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Nathan Stower</title>
+    <meta name="description" content="Frequently asked questions about working with Nathan Stower.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200..700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --primary: #0f0f0f;
+            --primary-light: #1e1e1e;
+            --secondary: #fafafa;
+            --accent: #888;
+            --accent-light: #e5e5e5;
+            --yellow: #eab308;
+            --yellow-light: rgba(234, 179, 8, 0.1);
+            --white: #ffffff;
+            --transition: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-fast: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-strong: 0 20px 40px -4px rgba(0, 0, 0, 0.1), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+            --shadow-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 12px 24px -8px rgba(0, 0, 0, 0.08);
+            --stroke-subtle: 0.5px solid rgba(0, 0, 0, 0.08);
+            --stroke-medium: 0.5px solid rgba(0, 0, 0, 0.15);
+            --stroke-accent: 0.5px solid var(--yellow);
+            --stroke-hover: 0.5px solid rgba(234, 179, 8, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            line-height: 1.6;
+            color: var(--primary);
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .font-serif { font-family: var(--font-serif); }
+        .text-hero { font-size: clamp(3.5rem, 8vw, 8.5rem); line-height: 0.9; }
+        .text-large { font-size: clamp(1.25rem, 3vw, 2.25rem); }
+        .text-display { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; }
+
+        .focus-ring:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.3);
+            border-radius: 0.25rem;
+        }
+
+        section { scroll-margin-top: 100px; }
+
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faq-section {
+            background: #fafafa;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            text-align: left;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-serif);
+            font-size: 1.125rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(234, 179, 8, 0.05);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+
+        .nav-link.active {
+            color: var(--primary) !important;
+            font-weight: 500;
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--yellow);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+    <header id="page-header" role="banner">
+        <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50 layer-elevated" role="navigation">
+            <div class="container-centered py-5 flex items-center justify-between">
+                <div class="text-2xl font-serif tracking-tight reveal">
+                    <a href="/" class="focus-ring stroke-interactive px-3 py-1 rounded-lg">Nathan</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <ul class="hidden md:flex items-center space-x-8" role="menubar">
+                        <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Work</a></li>
+                        <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Insights</a></li>
+                        <li role="none"><a href="custom-leadership-packages.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Leadership</a></li>
+                        <li role="none"><a href="process.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Process</a></li>
+                        <li role="none"><a href="faq.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">FAQ</a></li>
+                        <li role="none"><a href="/#contact" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section id="faq" class="py-32">
+            <div class="container-centered max-w-4xl mx-auto">
+                <header class="text-center mb-16 reveal">
+                    <h2 class="text-5xl font-serif font-light mb-4">Frequently asked questions</h2>
+                    <p class="text-lg font-light text-gray-600">Everything you need to know about working together</p>
+                </header>
+
+                <div class="faq-section reveal delay-1">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>How quickly can we see results?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Most clients see initial improvements within 30 days, with significant results (40%+ conversion increases) typically achieved within 90 days. Quick wins are implemented immediately, while strategic transformations show measurable impact within the first quarter.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>What's included in the strategy consultation?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                The free 30-minute consultation includes a comprehensive audit of your current digital presence, identification of immediate opportunities, and a custom strategy roadmap. You'll receive actionable insights regardless of whether we work together.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Do you work with companies of all sizes?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                I specialize in working with ambitious businesses ready to invest in strategic growth. Whether you're a startup scaling rapidly or an enterprise transforming digitally, the focus is on companies committed to measurable outcomes and long-term success.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>What's your approach to measuring success?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Every project begins with defining clear success metrics aligned with your business goals. We track conversion rates, user engagement, revenue impact, and other KPIs specific to your industry. Regular reporting ensures transparency and accountability.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Can you work with our existing team?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Absolutely. I often work as an extension of existing teams, providing strategic guidance while collaborating with your developers, designers, and marketers. Knowledge transfer and capability building are integral parts of every engagement.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-16 border-t border-minimal" role="contentinfo">
+        <div class="container-centered flex flex-col md:flex-row justify-between items-center text-sm font-light text-gray-500">
+            <p>© 2024 Nathan Stower. All rights reserved.</p>
+            <div class="flex items-center space-x-6 mt-4 md:mt-0">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            const isActive = answer.classList.contains('active');
+
+            document.querySelectorAll('.faq-answer.active').forEach(openAnswer => {
+                if (openAnswer !== answer) {
+                    openAnswer.classList.remove('active');
+                    openAnswer.style.maxHeight = null;
+                    openAnswer.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                }
+            });
+
+            if (isActive) {
+                answer.classList.remove('active');
+                answer.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                answer.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+        if (typeof window.initPage !== 'function') {
+            window.initPage = function() {
+                console.log("Initializing page scripts for a direct load...");
+            }
+        }
+    </script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
