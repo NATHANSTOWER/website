@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nathan Stower — Strategic Design for Ambitious Businesses</title>
+    <meta name="description" content="Strategic digital consultant specializing in user experience design and business transformation. 250%+ ROI increase guaranteed. Based in Brisbane, working globally.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200..700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --primary: #0f0f0f;
+            --primary-light: #1e1e1e;
+            --secondary: #fafafa;
+            --accent: #888;
+            --accent-light: #e5e5e5;
+            --yellow: #eab308;
+            --yellow-light: rgba(234, 179, 8, 0.1);
+            --white: #ffffff;
+            --transition: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-fast: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-strong: 0 20px 40px -4px rgba(0, 0, 0, 0.1), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+            --shadow-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 12px 24px -8px rgba(0, 0, 0, 0.08);
+            --stroke-subtle: 0.5px solid rgba(0, 0, 0, 0.08);
+            --stroke-medium: 0.5px solid rgba(0, 0, 0, 0.15);
+            --stroke-accent: 0.5px solid var(--yellow);
+            --stroke-hover: 0.5px solid rgba(234, 179, 8, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            line-height: 1.6;
+            color: var(--primary);
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .font-serif { font-family: var(--font-serif); }
+        .text-hero { font-size: clamp(3.5rem, 8vw, 8.5rem); line-height: 0.9; }
+        .text-large { font-size: clamp(1.25rem, 3vw, 2.25rem); }
+        .text-display { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; }
+
+        /* Enhanced Performance Optimizations */
+        .layer-floating, .service-card, .enhanced-hover {
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .parallax-bg {
+            background-image: url('https://i.imgur.com/iAVSGiv.png');
+            background-size: cover;
+            background-position: center;
+            image-rendering: optimizeQuality;
+            content-visibility: auto;
+            contain-intrinsic-size: 800px 600px;
+        }
+
+        .border-minimal {
+            border: var(--stroke-subtle);
+            transition: border-color var(--transition-fast);
+        }
+        .border-minimal:hover { border-color: var(--yellow); }
+        .border-minimal-dark { border: 0.5px solid rgba(255, 255, 255, 0.12); }
+
+        .stroke-interactive {
+            border: var(--stroke-subtle);
+            transition: all var(--transition-fast);
+        }
+        .stroke-interactive:hover {
+            border-color: var(--yellow);
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-1px);
+        }
+
+        .content-segment {
+            border-top: var(--stroke-subtle);
+            position: relative;
+        }
+        .content-segment::before {
+            content: '';
+            position: absolute;
+            top: -0.5px;
+            left: 0;
+            width: 0;
+            height: 0.5px;
+            background: var(--yellow);
+            transition: width 0.6s ease;
+        }
+        .content-segment:hover::before { width: 100%; }
+
+        .layer-base {
+            position: relative;
+            background: var(--white);
+            box-shadow: var(--shadow-minimal);
+        }
+        .layer-elevated {
+            box-shadow: var(--shadow-subtle);
+            border: var(--stroke-subtle);
+        }
+        .layer-floating {
+            box-shadow: var(--shadow-medium);
+            border: var(--stroke-medium);
+        }
+        .layer-floating:hover {
+            box-shadow: var(--shadow-floating);
+            border-color: var(--yellow);
+            transform: translateY(-2px);
+        }
+
+        .focus-ring:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.3);
+            border-radius: 0.25rem;
+        }
+
+        section { scroll-margin-top: 100px; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all var(--transition);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        .enhanced-hover {
+            transition: all var(--transition-fast);
+            border: var(--stroke-subtle);
+        }
+        .enhanced-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+            border-color: var(--yellow);
+        }
+
+        .service-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: var(--stroke-subtle);
+            box-shadow: var(--shadow-subtle);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-floating);
+            border-color: var(--yellow);
+        }
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+            background-color: var(--yellow);
+            color: white;
+        }
+        .service-icon {
+            transition: all 0.3s ease;
+            background-color: var(--primary);
+            color: var(--yellow);
+        }
+
+        /* Enhanced CTA Styles */
+        .btn-primary-enhanced {
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-fast);
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary-enhanced:hover::before { left: 100%; }
+
+        .btn-primary-enhanced:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .cta-subtext {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+        }
+
+        /* Availability Banner */
+        .availability-banner {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 1px solid #f59e0b;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #92400e;
+            margin-bottom: 1rem;
+        }
+
+        .pulse-indicator {
+            width: 8px;
+            height: 8px;
+            background: #f59e0b;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Social Proof Inline */
+        .social-proof-inline {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--accent);
+        }
+
+        .availability-indicator {
+            color: #16a34a;
+            font-weight: 500;
+        }
+
+        /* Results Metrics */
+        .results-metrics {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric {
+            background: var(--yellow-light);
+            color: var(--yellow);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .timeframe {
+            color: var(--accent);
+            font-size: 0.75rem;
+            align-self: center;
+        }
+
+        /* Process Preview */
+        .process-preview {
+            background: rgba(234, 179, 8, 0.05);
+            border: 1px solid rgba(234, 179, 8, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .process-preview h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .process-preview ol {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .process-preview li {
+            counter-increment: step-counter;
+            margin-bottom: 0.75rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .process-preview li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--yellow);
+            color: white;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced FAQ Styles */
+        .faq-section {
+            background: #fafafa;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            text-align: left;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-serif);
+            font-size: 1.125rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(234, 179, 8, 0.05);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+
+        .card-stack {
+            position: relative;
+            border: var(--stroke-subtle);
+            transition: all var(--transition-fast);
+        }
+        .card-stack::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: -8px;
+            bottom: -8px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: inherit;
+            z-index: -1;
+            transition: all 0.3s ease;
+            border: var(--stroke-subtle);
+        }
+        .card-stack:hover {
+            border-color: var(--yellow);
+            box-shadow: var(--shadow-strong);
+        }
+        .card-stack:hover::before {
+            transform: translate(-4px, -4px);
+            opacity: 0.8;
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-fast);
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-primary:hover::before { left: 100%; }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--yellow) 100%);
+            z-index: 100;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(100px);
+            z-index: 50;
+            box-shadow: var(--shadow-medium);
+        }
+        .fab.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fab:hover {
+            background: var(--yellow);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+            position: relative;
+        }
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: load 1.5s var(--transition) forwards;
+            z-index: 100;
+        }
+        @keyframes load { to { transform: scaleX(1); } }
+
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.4);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+            z-index: 9999;
+        }
+        @media (pointer: coarse) { #cursor { display: none; } }
+
+        .parallax-bg {
+            transform: translateY(0);
+            transition: transform 0.6s ease-out;
+            will-change: transform;
+        }
+        .parallax-slow, .parallax-fast { will-change: transform; }
+
+        .nav-link.active {
+            color: var(--primary) !important;
+            font-weight: 500;
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--yellow);
+        }
+
+        body.dark {
+            background: var(--primary);
+            color: var(--white);
+        }
+        body.dark .bg-gray-50 { background: var(--primary-light); }
+        body.dark .bg-white { background: var(--primary); }
+        body.dark .text-gray-900 { color: var(--white); }
+        body.dark .text-gray-600,
+        body.dark .text-gray-500 { color: var(--accent); }
+        body.dark .border-minimal { border-color: rgba(255, 255, 255, 0.08); }
+        body.dark .nav-link.active { color: var(--white) !important; }
+
+        .micro-bounce { animation: micro-bounce 2s infinite; }
+        @keyframes micro-bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-3px); }
+            60% { transform: translateY(-2px); }
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .menu-toggle {
+            transition: all 0.3s ease;
+        }
+        .menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Fixed centered container system */
+        .container-centered {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        @media (min-width: 1600px) {
+            .container-centered {
+                max-width: 1600px;
+            }
+        }
+
+        @media (min-width: 2000px) {
+            .container-centered {
+                max-width: 1800px;
+            }
+        }
+
+        @media (min-width: 2400px) {
+            .container-centered {
+                max-width: 2000px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .fab {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+            }
+            .parallax-bg,
+            .parallax-slow,
+            .parallax-fast {
+                transform: none !important;
+            }
+            .text-hero {
+                font-size: clamp(2.5rem, 8vw, 5rem);
+            }
+
+            .enhanced-hover:hover {
+                transform: translateY(-1px);
+            }
+
+            .service-card {
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .parallax-bg,
+            .parallax-slow,
+            .parallax-fast {
+                transform: none !important;
+            }
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--yellow) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Pulse animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900 antialiased">
+    <div class="progress-bar" role="progressbar" aria-label="Page scroll progress"></div>
+
+    <a href="#contact" class="fab" aria-label="Get in touch" title="Contact me">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+        </svg>
+    </a>
+
+    <div id="loader" role="status" aria-label="Loading"></div>
+    <div id="cursor" aria-hidden="true"></div>
+
+    <header id="page-header" role="banner">
+        <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50 layer-elevated" role="navigation">
+            <div class="container-centered py-5 flex items-center justify-between">
+                <div class="text-2xl font-serif tracking-tight reveal">
+                    <a href="/" class="focus-ring stroke-interactive px-3 py-1 rounded-lg">Nathan</a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <ul class="hidden md:flex items-center space-x-10 reveal delay-1" role="menubar">
+                        <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all duration-300 focus-ring stroke-interactive px-3 py-1 rounded" role="menuitem">Work</a></li>
+                        <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all duration-300 focus-ring stroke-interactive px-3 py-1 rounded" role="menuitem">Insights</a></li>
+                        <li role="none"><a href="#process" class="nav-link text-sm text-gray-600 hover:text-black transition-all duration-300 focus-ring stroke-interactive px-3 py-1 rounded" role="menuitem">Process</a></li>
+                        <li role="none"><a href="#about" class="nav-link text-sm text-gray-600 hover:text-black transition-all duration-300 focus-ring stroke-interactive px-3 py-1 rounded" role="menuitem">About</a></li>
+                        <li role="none"><a href="#contact" class="nav-link text-sm text-gray-600 hover:text-black transition-all duration-300 focus-ring stroke-interactive px-3 py-1 rounded" role="menuitem">Contact</a></li>
+                    </ul>
+
+                    <button id="themeToggle" aria-label="Toggle dark mode" class="w-6 h-6 reveal delay-2 focus-ring stroke-interactive p-2 rounded-lg">
+                        <svg id="sun" class="w-full h-full" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                        </svg>
+                        <svg id="moon" class="w-full h-full hidden" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobileMenuButton" class="md:hidden focus-ring stroke-interactive p-2 rounded-lg menu-toggle" aria-label="Toggle menu">
+                    <span class="block w-6 h-0.5 bg-black mb-1.5 transition-all"></span>
+                    <span class="block w-6 h-0.5 bg-black mb-1.5 transition-all"></span>
+                    <span class="block w-6 h-0.5 bg-black transition-all"></span>
+                </button>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="mobile-menu fixed inset-0 bg-white z-40 pt-20 px-6 md:hidden">
+                <div class="flex flex-col space-y-6 py-8">
+                    <a href="work.html" class="text-xl font-light py-2 border-b border-gray-100">Work</a>
+                    <a href="insights.html" class="text-xl font-light py-2 border-b border-gray-100">Insights</a>
+                    <a href="#process" class="text-xl font-light py-2 border-b border-gray-100">Process</a>
+                    <a href="#about" class="text-xl font-light py-2 border-b border-gray-100">About</a>
+                    <a href="#contact" class="text-xl font-light py-2">Contact</a>
+                </div>
+                <div class="absolute bottom-8 left-6">
+                    <button id="mobileThemeToggle" aria-label="Toggle dark mode" class="w-6 h-6 focus-ring stroke-interactive p-2 rounded-lg">
+                        <svg id="mobileSun" class="w-full h-full" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                        </svg>
+                        <svg id="mobileMoon" class="w-full h-full hidden" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section id="hero" class="min-h-screen flex items-center relative overflow-hidden bg-black" role="banner">
+            <!-- Dramatic Video Background -->
+            <div class="absolute inset-0 w-full h-full" aria-hidden="true">
+                <video
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    class="w-full h-full object-cover opacity-70"
+                    style="object-position: 65% center;"
+                    poster="https://i.imgur.com/iAVSGiv.png"
+                >
+                    <source src="https://i.imgur.com/cwCmhAs.mp4" type="video/mp4">
+                    <img src="https://i.imgur.com/iAVSGiv.png" alt="Hero background" class="w-full h-full object-cover" style="object-position: 65% center;">
+                </video>
+                <!-- Dark overlay for dramatic effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30"></div>
+            </div>
+
+            <div class="container-centered py-32 relative z-20 w-full">
+                <div class="max-w-5xl">
+
+                    <!-- Bold Availability Banner -->
+                    <div class="reveal mb-8">
+                        <div class="inline-flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-semibold text-sm">
+                            <div class="w-2 h-2 bg-black rounded-full mr-2 animate-pulse"></div>
+                            Limited spots: 2 strategy sessions available this month
+                        </div>
+                    </div>
+
+                    <!-- Dramatic Headline -->
+                    <div class="reveal delay-1 mb-12">
+                        <h1 class="text-white font-serif leading-none mb-6" style="font-size: clamp(4rem, 10vw, 9rem); font-weight: 300;">
+                            Strategic design
+                        </h1>
+                        <h2 class="text-yellow-400 font-serif italic leading-none" style="font-size: clamp(4rem, 10vw, 9rem); font-weight: 500;">
+                            for ambitious businesses
+                        </h2>
+                    </div>
+
+                    <!-- Bold Value Proposition -->
+                    <div class="reveal delay-2 mb-16">
+                        <p class="text-white text-2xl font-light leading-relaxed max-w-3xl">
+                            Increase conversions by <span class="text-yellow-400 font-bold text-3xl">up to 250%+</span> through strategic UX, design optimization, and digital transformation.
+                        </p>
+                    </div>
+
+                    <!-- Strong CTA -->
+                    <div class="reveal delay-3 mb-20">
+                        <a href="#contact" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black px-12 py-6 font-bold text-lg rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl focus-ring">
+                            Book a Free Strategy Call
+                            <div class="text-sm font-normal opacity-80 mt-1">30-min consultation to assess your goals</div>
+                        </a>
+                    </div>
+
+                    <!-- Powerful Stats Row -->
+                    <div class="reveal delay-4">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-white/20">
+                            <div class="text-center">
+                                <div class="stat-counter text-5xl font-serif font-light text-white mb-2" data-target="250">0</div>
+                                <div class="text-yellow-400 text-sm font-semibold uppercase tracking-wide">Average ROI %</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="stat-counter text-5xl font-serif font-light text-white mb-2" data-target="150">0</div>
+                                <div class="text-yellow-400 text-sm font-semibold uppercase tracking-wide">Projects</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="stat-counter text-5xl font-serif font-light text-white mb-2" data-target="98">0</div>
+                                <div class="text-yellow-400 text-sm font-semibold uppercase tracking-wide">Satisfaction %</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="stat-counter text-5xl font-serif font-light text-white mb-2" data-target="5">0</div>
+                                <div class="text-yellow-400 text-sm font-semibold uppercase tracking-wide">Years</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="reveal delay-4 mt-12">
+                        <div class="flex flex-wrap items-center gap-8 text-white/80 text-sm">
+                            <div class="flex items-center gap-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>4.9/5 client satisfaction</span>
+                            </div>
+                            <span>150+ projects delivered worldwide</span>
+                            <span class="text-yellow-400 font-semibold">✓ Available June 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Minimal Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 reveal delay-4">
+                <i class="fas fa-chevron-down text-white/60 text-lg animate-bounce"></i>
+            </div>
+        </section>
+
+        <section id="about" class="py-32 relative overflow-hidden">
+            <div class="container-centered">
+                <div class="absolute top-20 right-20 w-64 h-64 bg-gray-100 rounded-full opacity-30 parallax-slow" aria-hidden="true"></div>
+                <div class="absolute bottom-20 left-20 w-32 h-32 bg-yellow-400 rounded-full opacity-20 parallax-fast" aria-hidden="true"></div>
+
+                <div class="grid lg:grid-cols-12 gap-16 items-center relative z-10">
+                    <div class="lg:col-span-7 reveal">
+                        <div class="max-w-2xl">
+                            <div class="text-sm font-light text-gray-500 uppercase tracking-wide mb-6">Philosophy</div>
+                            <h2 class="text-5xl lg:text-6xl font-serif font-light mb-8 leading-tight">
+                                Strategy is<br/>
+                                <em class="text-gray-600">invisible design</em>
+                            </h2>
+                            <p class="text-xl font-light text-gray-600 leading-relaxed mb-8">
+                                The best solutions feel inevitable. They emerge from deep understanding of context, constraint, and human need—creating experiences that seem effortlessly simple yet are sophisticatedly complex underneath.
+                            </p>
+
+                            <div class="space-y-8">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-2 h-2 bg-black rounded-full mt-3 flex-shrink-0" aria-hidden="true"></div>
+                                    <div>
+                                        <h3 class="font-medium mb-2">Questions before solutions</h3>
+                                        <p class="text-sm font-light text-gray-600">Every project begins with deep inquiry into your business context, user behaviors, and market dynamics.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-2 h-2 bg-yellow-400 rounded-full mt-3 flex-shrink-0" aria-hidden="true"></div>
+                                    <div>
+                                        <h3 class="font-medium mb-2">Human-centered complexity</h3>
+                                        <p class="text-sm font-light text-gray-600">Sophisticated systems designed to feel intuitive, reducing cognitive load while maximizing capability.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-2 h-2 bg-gray-400 rounded-full mt-3 flex-shrink-0" aria-hidden="true"></div>
+                                    <div>
+                                        <h3 class="font-medium mb-2">Measurable outcomes</h3>
+                                        <p class="text-sm font-light text-gray-600">Strategic decisions validated through data, user feedback, and business performance metrics.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 reveal delay-1">
+                        <figure class="layer-floating rounded-2xl p-8 lg:p-12 relative">
+                            <div class="results-metrics">
+                                <span class="metric">+340% conversions</span>
+                                <span class="timeframe">in 3 months</span>
+                            </div>
+                            <div class="text-6xl font-serif text-gray-300 absolute top-4 left-6" aria-hidden="true">"</div>
+                            <blockquote class="text-lg font-light leading-relaxed text-gray-700 mb-6 relative z-10 pt-8">
+                                Nathan's strategic approach transformed our entire digital presence. He doesn't just design interfaces—he architected our entire user experience strategy. The results speak for themselves: 340% increase in conversions within three months.
+                            </blockquote>
+                            <figcaption class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-gray-300 rounded-full layer-elevated" aria-hidden="true"></div>
+                                <div>
+                                    <div class="font-medium text-gray-900">Sarah Chen</div>
+                                    <div class="text-sm font-light text-gray-600">VP Product, TechFlow</div>
+                                    <a href="#case-studies" class="text-xs text-yellow-600 hover:text-yellow-800 transition-colors">View case study →</a>
+                                </div>
+                            </figcaption>
+                        </figure>
+
+                        <div class="mt-8 text-center lg:text-left">
+                            <div class="text-sm font-light text-gray-500 mb-2">Based in Brisbane, working globally</div>
+                            <div class="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm layer-elevated">
+                                <div class="w-2 h-2 bg-green-600 rounded-full animate-pulse" aria-hidden="true"></div>
+                                <span>Available for new projects</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="py-32 parallax-fast">
+            <div class="container-centered">
+                <header class="text-center mb-20 reveal">
+                    <h2 class="text-5xl font-serif font-light mb-4">Selected expertise</h2>
+                    <div class="w-20 h-px bg-black mx-auto"></div>
+                </header>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+
+                    <!-- Featured Service - Digital Strategy -->
+                    <article class="bg-black text-white rounded-lg p-8 service-card card-stack reveal delay-1 md:col-span-2 lg:col-span-1">
+                        <div class="service-icon w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-sitemap text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-serif font-light mb-4">Digital Strategy & Transformation</h3>
+                        <p class="font-light text-gray-300 mb-6 leading-relaxed">Comprehensive strategies that align technology with human behavior.</p>
+                        <a href="work/digital-strategy.html" class="text-sm font-medium text-yellow-400 hover:text-yellow-200 transition-colors">Learn more →</a>
+                    </article>
+
+                    <!-- Experience Design -->
+                    <article class="bg-gray-50 rounded-lg p-6 service-card enhanced-hover reveal delay-2">
+                        <div class="service-icon w-10 h-10 bg-black rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-user-circle text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-serif mb-3">Experience Design</h3>
+                        <p class="text-sm font-light text-gray-600 leading-relaxed mb-3">Human-centered design that creates meaningful connections.</p>
+                        <a href="#" class="text-sm font-medium text-yellow-600 hover:text-yellow-800 transition-colors">Learn more →</a>
+                    </article>
+
+                    <!-- Conversion Optimization -->
+                    <article class="bg-yellow-400 text-gray-900 rounded-lg p-6 service-card enhanced-hover reveal delay-3">
+                        <div class="service-icon w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-line text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-lg font-serif mb-3">Conversion Optimization</h3>
+                        <p class="text-sm font-light leading-relaxed mb-2">Data-driven testing for maximum ROI.</p>
+                        <a href="#" class="text-sm font-medium text-gray-800 hover:text-black transition-colors">Learn more →</a>
+                    </article>
+
+                </div>
+                <div class="text-center mt-12 reveal delay-4">
+                    <a href="work.html" class="inline-block bg-black hover:bg-gray-800 text-white px-8 py-3 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 focus-ring">
+                        View All Services
+                    </a>
+                </div>
+
+                <!-- Client Partnerships -->
+                <div class="py-20 content-segment reveal">
+                    <header class="text-center mb-12">
+                        <h3 class="text-sm font-light text-gray-500 uppercase tracking-wide mb-4">Trusted by industry leaders</h3>
+                    </header>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-60">
+                        <!-- Row 1 -->
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-xl font-serif font-bold text-gray-400">ATLASSIAN</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-lg font-sans font-semibold text-gray-400">HubSpot</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-xl font-sans font-bold text-gray-400">Zendesk</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-lg font-serif text-gray-400">monday.com</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-xl font-sans font-bold text-gray-400">Canva</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-lg font-serif text-gray-400">Shopify</div>
+                        </div>
+
+                        <!-- Row 2 -->
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-lg font-sans font-semibold text-gray-400">Airtable</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-xl font-serif text-gray-400">Notion</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-lg font-sans font-bold text-gray-400">Stripe</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-xl font-sans font-semibold text-gray-400">Figma</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-lg font-serif text-gray-400">Linear</div>
+                        </div>
+                        <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                            <div class="text-xl font-sans font-bold text-gray-400">Vercel</div>
+                        </div>
+                    </div>
+
+                    <!-- Partnership Note -->
+                    <div class="text-center mt-12">
+                        <div class="layer-elevated p-6 rounded-lg max-w-2xl mx-auto">
+                            <p class="text-sm font-light text-gray-500">
+                                Strategic partnerships and consulting engagements across SaaS, fintech, and digital transformation initiatives.
+                                <span class="font-medium text-gray-700">150+ projects delivered</span> with measurable business impact and
+                                <span class="font-medium text-gray-700">98% client satisfaction rate</span>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="py-32 bg-gray-50">
+            <div class="container-centered">
+                <header class="text-center mb-20 reveal">
+                    <h2 class="text-5xl font-serif font-light mb-4">Strategic process</h2>
+                    <p class="text-lg font-light text-gray-600 max-w-2xl mx-auto">A tailored approach for each engagement, built on proven methodologies</p>
+                </header>
+
+                <div class="grid md:grid-cols-3 gap-8 reveal delay-1 mb-16">
+                    <div class="bg-white p-8 rounded-xl layer-floating">
+                        <div class="text-4xl font-serif mb-4 text-yellow-400">1</div>
+                        <h3 class="text-xl font-serif mb-3">Discovery</h3>
+                        <p class="text-gray-600 mb-4">Deep dive into your business context, user needs, and market opportunities through research and stakeholder interviews.</p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                                <span>Stakeholder workshops</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                                <span>User research & analysis</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                                <span>Competitive landscape</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl layer-floating">
+                        <div class="text-4xl font-serif mb-4 text-yellow-400">2</div>
+                        <h3 class="text-xl font-serif mb-3">Strategy</h3>
+                        <p class="text-gray-600 mb-4">Developing a clear roadmap that aligns business objectives with user needs and technical feasibility.</p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                                <span>Opportunity mapping</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                                <span>Experience architecture</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                                <span>Success metrics</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl layer-floating">
+                        <div class="text-4xl font-serif mb-4 text-yellow-400">3</div>
+                        <h3 class="text-xl font-serif mb-3">Execution</h3>
+                        <p class="text-gray-600 mb-4">Bringing the strategy to life through iterative design, development, and continuous optimization.</p>
+                        <ul class="space-y-2 text-sm text-gray-500">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                                <span>Prototyping & testing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                                <span>Agile development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                                <span>Performance tracking</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Process Preview -->
+                <div class="process-preview reveal delay-2">
+                    <h3>What happens next?</h3>
+                    <ol>
+                        <li>Free 30-minute discovery call within 24 hours</li>
+                        <li>Custom strategy proposal within 48 hours</li>
+                        <li>Project kickoff within 1 week</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-32">
+            <div class="container-centered max-w-4xl mx-auto">
+                <header class="text-center mb-16 reveal">
+                    <h2 class="text-5xl font-serif font-light mb-4">Frequently asked questions</h2>
+                    <p class="text-lg font-light text-gray-600">Everything you need to know about working together</p>
+                </header>
+
+                <div class="faq-section reveal delay-1">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>How quickly can we see results?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Most clients see initial improvements within 30 days, with significant results (40%+ conversion increases) typically achieved within 90 days. Quick wins are implemented immediately, while strategic transformations show measurable impact within the first quarter.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>What's included in the strategy consultation?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                The free 30-minute consultation includes a comprehensive audit of your current digital presence, identification of immediate opportunities, and a custom strategy roadmap. You'll receive actionable insights regardless of whether we work together.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Do you work with companies of all sizes?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                I specialize in working with ambitious businesses ready to invest in strategic growth. Whether you're a startup scaling rapidly or an enterprise transforming digitally, the focus is on companies committed to measurable outcomes and long-term success.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>What's your approach to measuring success?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Every project begins with defining clear success metrics aligned with your business goals. We track conversion rates, user engagement, revenue impact, and other KPIs specific to your industry. Regular reporting ensures transparency and accountability.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Can you work with our existing team?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Absolutely. I often work as an extension of existing teams, providing strategic guidance while collaborating with your developers, designers, and marketers. Knowledge transfer and capability building are integral parts of every engagement.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="insights" class="py-32 bg-gray-50">
+            <div class="container-centered">
+                <header class="text-center mb-20 reveal">
+                    <h2 class="text-5xl font-serif font-light mb-4">Recent insights</h2>
+                    <p class="text-lg font-light text-gray-600 max-w-2xl mx-auto">Thoughts on digital strategy, design, and business transformation</p>
+                </header>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal delay-1">
+                    <article class="bg-white rounded-xl overflow-hidden layer-floating">
+                        <div class="h-48 bg-gradient-to-br from-yellow-400 to-yellow-600"></div>
+                        <div class="p-6">
+                            <div class="text-sm text-gray-500 mb-2">May 12, 2024</div>
+                            <h3 class="text-xl font-serif mb-3">The ROI of Strategic UX</h3>
+                            <p class="text-gray-600 mb-4">How strategic UX investment delivers measurable business outcomes, with real case studies showing 250%+ ROI increases.</p>
+                            <a href="insights/the-roi-of-strategic-ux.html" class="text-sm font-medium text-yellow-600 hover:text-yellow-800 transition-colors">Read more →</a>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-xl overflow-hidden layer-floating">
+                        <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600"></div>
+                        <div class="p-6">
+                            <div class="text-sm text-gray-500 mb-2">April 28, 2024</div>
+                            <h3 class="text-xl font-serif mb-3">Measuring Design Impact</h3>
+                            <p class="text-gray-600 mb-4">Quantifying the business impact of design decisions and strategic UX investments through proven frameworks.</p>
+                            <a href="#" class="text-sm font-medium text-yellow-600 hover:text-yellow-800 transition-colors">Read more →</a>
+                        </div>
+                    </article>
+
+                    <article class="bg-white rounded-xl overflow-hidden layer-floating">
+                        <div class="h-48 bg-gradient-to-br from-green-400 to-green-600"></div>
+                        <div class="p-6">
+                            <div class="text-sm text-gray-500 mb-2">March 15, 2024</div>
+                            <h3 class="text-xl font-serif mb-3">Conversion Psychology</h3>
+                            <p class="text-gray-600 mb-4">Understanding the psychological principles that drive user behavior and how to apply them ethically for business growth.</p>
+                            <a href="#" class="text-sm font-medium text-yellow-600 hover:text-yellow-800 transition-colors">Read more →</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="text-center mt-12 reveal delay-2">
+                    <a href="insights.html" class="inline-block bg-black hover:bg-gray-800 text-white px-8 py-3 font-medium rounded-lg transition-all duration-300 transform hover:scale-105 focus-ring">
+                        View All Insights
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-32 bg-gray-50">
+            <div class="container-centered max-w-4xl mx-auto text-center">
+                <header class="mb-16">
+                    <h2 class="text-5xl font-serif font-light mb-8 reveal">Let's work together</h2>
+                    <p class="text-xl font-light text-gray-600 mb-10 reveal delay-1">Ready to transform your digital presence?</p>
+                </header>
+
+                <div class="reveal delay-2">
+                    <a href="mailto:hello@nathanstower.com" class="btn-primary-enhanced focus-ring">
+                        <span>hello@nathanstower.com</span>
+                        <span class="cta-subtext">Response within 24 hours</span>
+                    </a>
+                    <div class="social-proof-inline justify-center mt-6">
+                        <div class="text-sm font-light text-gray-500">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="ml-2">4.9/5 client satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-left reveal delay-3">
+                    <div class="p-6 bg-white rounded-lg layer-elevated">
+                        <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-map-marker-alt text-yellow-600"></i>
+                        </div>
+                        <h3 class="font-medium mb-2">Location</h3>
+                        <p class="text-gray-600">Brisbane, Australia<br>
+                        <span class="text-sm text-gray-500">Serving clients globally</span></p>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-lg layer-elevated">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-clock text-blue-600"></i>
+                        </div>
+                        <h3 class="font-medium mb-2">Availability</h3>
+                        <p class="text-gray-600">Monday - Friday<br>
+                        <span class="text-sm text-gray-500">9AM - 5PM AEST</span></p>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-lg layer-elevated">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-calendar-check text-green-600"></i>
+                        </div>
+                        <h3 class="font-medium mb-2">Next availability</h3>
+                        <p class="text-gray-600">June 2024<br>
+                        <span class="text-sm text-green-600 font-medium">2 spots remaining</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-16 border-t border-minimal" role="contentinfo">
+        <div class="container-centered flex flex-col md:flex-row justify-between items-center text-sm font-light text-gray-500">
+            <p>© 2024 Nathan Stower. All rights reserved.</p>
+            <div class="flex items-center space-x-6 mt-4 md:mt-0">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        var perf = {
+            cache: new Map(),
+
+            init: function() {
+                this.cache.set('body', document.body);
+                this.cache.set('loader', document.getElementById('loader'));
+                this.cache.set('cursor', document.getElementById('cursor'));
+                this.cache.set('progressBar', document.querySelector('.progress-bar'));
+                this.cache.set('fab', document.querySelector('.fab'));
+                this.cache.set('heroParallax', document.querySelector('.parallax-bg'));
+                this.cache.set('navLinks', document.querySelectorAll('.nav-link'));
+                this.cache.set('sections', document.querySelectorAll('section[id]'));
+                this.cache.set('counters', document.querySelectorAll('.stat-counter'));
+                this.cache.set('themeToggle', document.getElementById('themeToggle'));
+                this.cache.set('mobileMenu', document.getElementById('mobileMenu'));
+                this.cache.set('mobileMenuButton', document.getElementById('mobileMenuButton'));
+                this.cache.set('mobileThemeToggle', document.getElementById('mobileThemeToggle'));
+            },
+
+            get: function(key) {
+                return this.cache.get(key);
+            }
+        };
+
+        var utils = {
+            throttle: function(func, limit) {
+                var inThrottle;
+                return function() {
+                    var args = arguments;
+                    var context = this;
+                    if (!inThrottle) {
+                        func.apply(context, args);
+                        inThrottle = true;
+                        setTimeout(function() {
+                            inThrottle = false;
+                        }, limit);
+                    }
+                };
+            }
+        };
+
+        var scrollManager = {
+            currentSection: '',
+
+            updateProgressBar: function() {
+                var progressBar = perf.get('progressBar');
+                if (!progressBar) return;
+
+                var scrollTop = window.pageYOffset;
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                var scrollPercent = Math.min((scrollTop / docHeight) * 100, 100);
+
+                progressBar.style.transform = 'scaleX(' + (scrollPercent / 100) + ')';
+            },
+
+            toggleFAB: function() {
+                var fab = perf.get('fab');
+                if (!fab) return;
+
+                var scrollY = window.pageYOffset;
+                var shouldShow = scrollY > 300;
+
+                if (shouldShow && !fab.classList.contains('visible')) {
+                    fab.classList.add('visible');
+                } else if (!shouldShow && fab.classList.contains('visible')) {
+                    fab.classList.remove('visible');
+                }
+            },
+
+            updateActiveNavLink: function() {
+                var sections = perf.get('sections');
+                var navLinks = perf.get('navLinks');
+                if (!sections || !navLinks) return;
+
+                var scrollPos = window.pageYOffset + 150;
+                var self = this;
+
+                sections.forEach(function(section) {
+                    var sectionTop = section.offsetTop;
+                    var sectionHeight = section.offsetHeight;
+                    var sectionId = section.getAttribute('id');
+
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        if (self.currentSection !== sectionId) {
+                            self.currentSection = sectionId;
+
+                            navLinks.forEach(function(link) {
+                                var linkHref = new URL(link.href).hash;
+                                var isActive = linkHref === '#' + sectionId;
+                                if (isActive) {
+                                    link.classList.add('active');
+                                } else {
+                                    link.classList.remove('active');
+                                }
+                            });
+                        }
+                    }
+                });
+            },
+
+            handleParallax: function() {
+                var scrolled = window.pageYOffset;
+
+                var heroParallax = perf.get('heroParallax');
+                if (heroParallax) {
+                    heroParallax.style.transform = 'translateY(' + (scrolled * 0.15) + 'px)';
+                }
+
+                var slowElements = document.querySelectorAll('.parallax-slow');
+                slowElements.forEach(function(element) {
+                    var speed = scrolled * 0.3;
+                    element.style.transform = 'translateY(' + speed + 'px)';
+                });
+            },
+
+            handleScroll: function() {
+                this.updateProgressBar();
+                this.toggleFAB();
+                this.updateActiveNavLink();
+                this.handleParallax();
+            }
+        };
+
+        var animationController = {
+            setupRevealAnimation: function() {
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                document.querySelectorAll('.reveal').forEach(function(el) {
+                    observer.observe(el);
+                });
+            },
+
+            setupCounterAnimation: function() {
+                var counters = perf.get('counters');
+                if (!counters) return;
+
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            animationController.animateCounter(entry.target);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.7 });
+
+                counters.forEach(function(counter) {
+                    observer.observe(counter);
+                });
+            },
+
+            animateCounter: function(counter) {
+                var target = parseInt(counter.getAttribute('data-target'));
+                var increment = target / 60;
+                var current = 0;
+
+                var timer = setInterval(function() {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 16);
+            }
+        };
+
+        var interactionHandler = {
+            setupSmoothScroll: function() {
+                document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                    anchor.addEventListener('click', function(e) {
+                        var href = anchor.getAttribute('href');
+                        // Ensure it's a hash link on the same page
+                        if (window.location.pathname.endsWith('/') || window.location.pathname.endsWith('index.html')) {
+                             if (href.startsWith('#')) {
+                                e.preventDefault();
+                                var target = document.querySelector(href);
+                                var navHeight = 100;
+
+                                // Close mobile menu if open
+                                var mobileMenu = perf.get('mobileMenu');
+                                if (mobileMenu && mobileMenu.classList.contains('open')) {
+                                    mobileMenu.classList.remove('open');
+                                    document.body.style.overflow = 'auto';
+                                }
+
+                                if (target) {
+                                    var targetPosition = target.offsetTop - navHeight;
+                                    window.scrollTo({
+                                        top: targetPosition,
+                                        behavior: 'smooth'
+                                    });
+                                }
+                            }
+                        }
+                    });
+                });
+            },
+
+            setupThemeToggle: function() {
+                var toggle = perf.get('themeToggle');
+                var mobileToggle = perf.get('mobileThemeToggle');
+                var body = perf.get('body');
+
+                if (!toggle || !body) return;
+
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                if (localStorage.theme === 'dark' || (!localStorage.theme && prefersDark)) {
+                    body.classList.add('dark');
+                    document.getElementById('sun').classList.add('hidden');
+                    document.getElementById('moon').classList.remove('hidden');
+                    document.getElementById('mobileSun').classList.add('hidden');
+                    document.getElementById('mobileMoon').classList.remove('hidden');
+                }
+
+                var toggleTheme = function() {
+                    body.classList.toggle('dark');
+                    localStorage.theme = body.classList.contains('dark') ? 'dark' : 'light';
+                    document.getElementById('sun').classList.toggle('hidden');
+                    document.getElementById('moon').classList.toggle('hidden');
+                    document.getElementById('mobileSun').classList.toggle('hidden');
+                    document.getElementById('mobileMoon').classList.toggle('hidden');
+                };
+
+                toggle.addEventListener('click', toggleTheme);
+                if (mobileToggle) {
+                    mobileToggle.addEventListener('click', toggleTheme);
+                }
+            },
+
+            setupCursor: function() {
+                var cursor = perf.get('cursor');
+                if (!cursor || window.matchMedia('(pointer: coarse)').matches) return;
+
+                var moveCursor = utils.throttle(function(e) {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                }, 16);
+
+                window.addEventListener('mousemove', moveCursor);
+
+                // Add cursor effects on hover
+                document.querySelectorAll('a, button, .service-card').forEach(function(el) {
+                    el.addEventListener('mouseenter', function() {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                        cursor.style.background = 'rgba(234, 179, 8, 0.4)';
+                    });
+                    el.addEventListener('mouseleave', function() {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                        cursor.style.background = 'rgba(0, 0, 0, 0.4)';
+                    });
+                });
+            },
+
+            setupMobileMenu: function() {
+                var menuButton = perf.get('mobileMenuButton');
+                var mobileMenu = perf.get('mobileMenu');
+
+                if (!menuButton || !mobileMenu) return;
+
+                menuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('open');
+                    menuButton.classList.toggle('open');
+
+                    if (mobileMenu.classList.contains('open')) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            },
+
+            setupAdvancedTracking: function() {
+                // Track scroll depth
+                var scrollMilestones = [25, 50, 75, 90];
+                var triggeredMilestones = [];
+
+                window.addEventListener('scroll', utils.throttle(function() {
+                    var scrollPercent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+
+                    scrollMilestones.forEach(function(milestone) {
+                        if (scrollPercent >= milestone && !triggeredMilestones.includes(milestone)) {
+                            triggeredMilestones.push(milestone);
+                            // Analytics tracking would go here
+                            console.log('Scroll milestone:', milestone + '%');
+                        }
+                    });
+                }, 100));
+
+                // Track engagement with services
+                document.querySelectorAll('.service-card').forEach(function(card, index) {
+                    card.addEventListener('mouseenter', function() {
+                        var serviceName = card.getAttribute('data-service') || 'unknown';
+                        // Analytics tracking would go here
+                        console.log('Service interest:', serviceName, 'position:', index);
+                    });
+                });
+
+                // Track CTA interactions
+                document.querySelectorAll('[href="#contact"], [href="mailto:hello@nathanstower.com"]').forEach(function(cta) {
+                    cta.addEventListener('click', function() {
+                        var section = cta.closest('section');
+                        var ctaLocation = section ? section.id : 'unknown';
+                        // Analytics tracking would go here
+                        console.log('CTA click:', ctaLocation);
+                    });
+                });
+            }
+        };
+
+        // FAQ Toggle Function
+        function toggleFAQ(button) {
+            var answer = button.nextElementSibling;
+            var icon = button.querySelector('i');
+            var isActive = answer.classList.contains('active');
+
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer.active').forEach(function(openAnswer) {
+                if (openAnswer !== answer) {
+                    openAnswer.classList.remove('active');
+                    openAnswer.style.maxHeight = null;
+                    openAnswer.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // Toggle current FAQ
+            if (isActive) {
+                answer.classList.remove('active');
+                answer.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                answer.classList.add('active');
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function initPage() {
+            perf.init();
+
+            var scrollHandler = utils.throttle(function() {
+                scrollManager.handleScroll();
+            }, 16);
+
+            window.addEventListener('scroll', scrollHandler, { passive: true });
+
+            window.addEventListener('load', function() {
+                var loader = perf.get('loader');
+                if (loader) {
+                    loader.style.transform = 'scaleX(0)';
+                    loader.style.transition = 'transform 0.6s ease';
+
+                    setTimeout(function() {
+                        loader.style.display = 'none';
+                    }, 600);
+                }
+
+                scrollManager.updateActiveNavLink();
+                document.body.classList.add('loaded');
+            });
+
+            animationController.setupRevealAnimation();
+            animationController.setupCounterAnimation();
+            interactionHandler.setupSmoothScroll();
+            interactionHandler.setupThemeToggle();
+            interactionHandler.setupCursor();
+            interactionHandler.setupMobileMenu();
+            interactionHandler.setupAdvancedTracking();
+        }
+
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>
