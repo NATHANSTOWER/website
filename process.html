@@ -3,272 +3,525 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Process — Nathan Stower</title>
-    <meta name="description" content="Our strategic process for delivering results.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200..700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Nathan Stower - UX Process</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Inter', sans-serif;
-            --primary: #0f0f0f;
-            --primary-light: #1e1e1e;
-            --secondary: #fafafa;
-            --accent: #888;
-            --accent-light: #e5e5e5;
-            --yellow: #eab308;
-            --yellow-light: rgba(234, 179, 8, 0.1);
-            --white: #ffffff;
-            --transition: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-fast: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.05);
-            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-medium: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-strong: 0 20px 40px -4px rgba(0, 0, 0, 0.1), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
-            --shadow-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 12px 24px -8px rgba(0, 0, 0, 0.08);
-            --stroke-subtle: 0.5px solid rgba(0, 0, 0, 0.08);
-            --stroke-medium: 0.5px solid rgba(0, 0, 0, 0.15);
-            --stroke-accent: 0.5px solid var(--yellow);
-            --stroke-hover: 0.5px solid rgba(234, 179, 8, 0.6);
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <!-- Three.js & GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.min.js"></script>
 
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
+    <link rel="stylesheet" href="styles-v3.css">
+    <link rel="stylesheet" href="styles/process.css">
 
-        body {
-            font-family: var(--font-sans);
-            font-weight: 300;
-            letter-spacing: -0.01em;
-            line-height: 1.6;
-            color: var(--primary);
-            background-color: var(--white);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-
-        .font-serif { font-family: var(--font-serif); }
-
-        .focus-ring:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.3);
-            border-radius: 0.25rem;
-        }
-
-        section { scroll-margin-top: 100px; }
-
-        .reveal {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .layer-floating {
-            box-shadow: var(--shadow-medium);
-            border: var(--stroke-medium);
-        }
-        .layer-floating:hover {
-            box-shadow: var(--shadow-floating);
-            border-color: var(--yellow);
-            transform: translateY(-2px);
-        }
-
-        .process-preview {
-            background: rgba(234, 179, 8, 0.05);
-            border: 1px solid rgba(234, 179, 8, 0.2);
-            border-radius: 1rem;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .process-preview h3 {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .process-preview ol {
-            list-style: none;
-            counter-reset: step-counter;
-        }
-
-        .process-preview li {
-            counter-increment: step-counter;
-            margin-bottom: 0.75rem;
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .process-preview li::before {
-            content: counter(step-counter);
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: var(--yellow);
-            color: white;
-            width: 1.5rem;
-            height: 1.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .nav-link.active {
-            color: var(--primary) !important;
-            font-weight: 500;
-            position: relative;
-        }
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--yellow);
-        }
-    </style>
 </head>
-<body class="bg-white text-gray-900 antialiased">
-    <header id="page-header" role="banner">
-        <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50 layer-elevated" role="navigation">
-            <div class="container-centered py-5 flex items-center justify-between">
-                <div class="text-2xl font-serif tracking-tight reveal">
-                    <a href="/" class="focus-ring stroke-interactive px-3 py-1 rounded-lg">Nathan</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <ul class="hidden md:flex items-center space-x-8" role="menubar">
-                        <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Work</a></li>
-                        <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Insights</a></li>
-                        <li role="none"><a href="custom-leadership-packages.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Leadership</a></li>
-                        <li role="none"><a href="process.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Process</a></li>
-                        <li role="none"><a href="about.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">About</a></li>
-                        <li role="none"><a href="faq.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">FAQ</a></li>
-                        <li role="none"><a href="/#contact" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
 
-    <main id="main-content">
-        <section id="process" class="py-32 bg-gray-50">
-            <div class="container-centered">
-                <header class="text-center mb-20 reveal">
-                    <h2 class="text-5xl font-serif font-light mb-4">Strategic process</h2>
-                    <p class="text-lg font-light text-gray-600 max-w-2xl mx-auto">A tailored approach for each engagement, built on proven methodologies</p>
-                </header>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Initializing Experience</div>
+    </div>
 
-                <div class="grid md:grid-cols-3 gap-8 reveal delay-1 mb-16">
-                    <div class="bg-white p-8 rounded-xl layer-floating">
-                        <div class="text-4xl font-serif mb-4 text-yellow-400">1</div>
-                        <h3 class="text-xl font-serif mb-3">Discovery</h3>
-                        <p class="text-gray-600 mb-4">Deep dive into your business context, user needs, and market opportunities through research and stakeholder interviews.</p>
-                        <ul class="space-y-2 text-sm text-gray-500">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
-                                <span>Stakeholder workshops</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
-                                <span>User research & analysis</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
-                                <span>Competitive landscape</span>
-                            </li>
-                        </ul>
-                    </div>
+    <!-- Cosmic Background -->
+    <div class="cosmic-background"></div>
 
-                    <div class="bg-white p-8 rounded-xl layer-floating">
-                        <div class="text-4xl font-serif mb-4 text-yellow-400">2</div>
-                        <h3 class="text-xl font-serif mb-3">Strategy</h3>
-                        <p class="text-gray-600 mb-4">Developing a clear roadmap that aligns business objectives with user needs and technical feasibility.</p>
-                        <ul class="space-y-2 text-sm text-gray-500">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
-                                <span>Opportunity mapping</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
-                                <span>Experience architecture</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
-                                <span>Success metrics</span>
-                            </li>
-                        </ul>
-                    </div>
+    <!-- Rubik's Cube Background -->
+    <div class="rubiks-background">
+        <canvas id="rubiks-canvas"></canvas>
+    </div>
 
-                    <div class="bg-white p-8 rounded-xl layer-floating">
-                        <div class="text-4xl font-serif mb-4 text-yellow-400">3</div>
-                        <h3 class="text-xl font-serif mb-3">Execution</h3>
-                        <p class="text-gray-600 mb-4">Bringing the strategy to life through iterative design, development, and continuous optimization.</p>
-                        <ul class="space-y-2 text-sm text-gray-500">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
-                                <span>Prototyping & testing</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
-                                <span>Agile development</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
-                                <span>Performance tracking</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="process-preview reveal delay-2">
-                    <h3>What happens next?</h3>
-                    <ol>
-                        <li>Free 30-minute discovery call within 24 hours</li>
-                        <li>Custom strategy proposal within 48 hours</li>
-                        <li>Project kickoff within 1 week</li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="py-16 border-t border-minimal" role="contentinfo">
-        <div class="container-centered flex flex-col md:flex-row justify-between items-center text-sm font-light text-gray-500">
-            <p>© 2024 Nathan Stower. All rights reserved.</p>
-            <div class="flex items-center space-x-6 mt-4 md:mt-0">
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
-                    <i class="fab fa-github"></i>
-                </a>
+    <!-- Rubik's Controls -->
+    <div class="rubiks-controls-overlay">
+        <div class="rubiks-controls-title">Cube Controls</div>
+        <button class="rubiks-btn" id="scrambleBtn">
+            <i class="fas fa-random"></i> Scramble
+        </button>
+        <button class="rubiks-btn" id="resetBtn">
+            <i class="fas fa-undo"></i> Reset
+        </button>
+        <div class="rubiks-toggle">
+            <span>Auto Mode</span>
+            <div class="toggle-switch active" id="autoToggle">
+                <div class="toggle-slider"></div>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <script>
-        if (typeof window.initPage !== 'function') {
-            window.initPage = function() {
-                console.log("Initializing page scripts for a direct load...");
-            }
-        }
-    </script>
-    <script src="/js/main.js"></script>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">Nathan Stower</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="work.html" class="nav-link">Work</a></li>
+                <li><a href="process.html" class="nav-link active">Process</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Scroll Container -->
+    <div id="scroll-container">
+        <section class="content-section" id="process-hero">
+            <div class="keyboard-guide">
+                <span>Navigate with</span>
+                <span class="key">↑</span>
+                <span class="key">↓</span>
+                <span>or</span>
+                <span class="key">←</span>
+                <span class="key">→</span>
+            </div>
+
+            <div class="particles-container" id="particles"></div>
+
+            <div class="stage-container" id="stageContainer">
+                <!-- Stage 1: Research & Discovery -->
+                <div class="stage-card" data-stage="1">
+                    <div class="card-content">
+                        <div class="stage-number-container">
+                            <div class="stage-count">01</div>
+                            <div class="stage-of-total">of 5</div>
+                            <div class="stage-duration">
+                                <i class="fas fa-clock"></i> 2-4 weeks
+                            </div>
+                        </div>
+
+                        <div class="stage-info">
+                            <h2 class="stage-title">Research & Discovery</h2>
+                            <p class="stage-subtitle">Understanding user needs and business goals</p>
+                        </div>
+
+                        <div class="stage-details">
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="detail-text">User interviews and persona development</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-chart-bar"></i>
+                                    </div>
+                                    <div class="detail-text">Competitive analysis and benchmarking</div>
+                                </div>
+                            </div>
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                    <div class="detail-text">Stakeholder workshops and requirements gathering</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="detail-text">Market research and trend analysis</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stage-tools">
+                            <div class="tools-title">
+                                <i class="fas fa-tools"></i> Tools We Use
+                            </div>
+                            <div class="tools-list">
+                                <div class="tool-badge">
+                                    <i class="fas fa-comments"></i> User Interviews
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-poll"></i> Surveys
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-chart-line"></i> Google Analytics
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-fire"></i> Hotjar
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-element research-element"></div>
+                    <canvas class="card-bg-pattern" id="pattern1"></canvas>
+                </div>
+
+                <!-- Stage 2: Strategy & Planning -->
+                <div class="stage-card" data-stage="2">
+                    <div class="card-content">
+                        <div class="stage-number-container">
+                            <div class="stage-count">02</div>
+                            <div class="stage-of-total">of 5</div>
+                            <div class="stage-duration">
+                                <i class="fas fa-clock"></i> 1-3 weeks
+                            </div>
+                        </div>
+
+                        <div class="stage-info">
+                            <h2 class="stage-title">Strategy & Planning</h2>
+                            <p class="stage-subtitle">Creating a roadmap for success</p>
+                        </div>
+
+                        <div class="stage-details">
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-route"></i>
+                                    </div>
+                                    <div class="detail-text">User journey mapping and flow diagrams</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-sitemap"></i>
+                                    </div>
+                                    <div class="detail-text">Information architecture development</div>
+                                </div>
+                            </div>
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <div class="detail-text">Content strategy and taxonomy</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="detail-text">Success metrics and KPIs definition</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stage-tools">
+                            <div class="tools-title">
+                                <i class="fas fa-tools"></i> Tools We Use
+                            </div>
+                            <div class="tools-list">
+                                <div class="tool-badge">
+                                    <i class="fas fa-pen-fancy"></i> Figma
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-project-diagram"></i> Miro
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-tasks"></i> Trello
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-book"></i> Notion
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-element strategy-element"></div>
+                    <canvas class="card-bg-pattern" id="pattern2"></canvas>
+                </div>
+
+                <!-- Stage 3: Design & Prototyping -->
+                <div class="stage-card" data-stage="3">
+                    <div class="card-content">
+                        <div class="stage-number-container">
+                            <div class="stage-count">03</div>
+                            <div class="stage-of-total">of 5</div>
+                            <div class="stage-duration">
+                                <i class="fas fa-clock"></i> 3-6 weeks
+                            </div>
+                        </div>
+
+                        <div class="stage-info">
+                            <h2 class="stage-title">Design & Prototyping</h2>
+                            <p class="stage-subtitle">Bringing ideas to life</p>
+                        </div>
+
+                        <div class="stage-details">
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-pencil-ruler"></i>
+                                    </div>
+                                    <div class="detail-text">Low-fidelity wireframing</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <div class="detail-text">High-fidelity mockups</div>
+                                </div>
+                            </div>
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-laptop-code"></i>
+                                    </div>
+                                    <div class="detail-text">Interactive prototyping</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <div class="detail-text">Design system development</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stage-tools">
+                            <div class="tools-title">
+                                <i class="fas fa-tools"></i> Tools We Use
+                            </div>
+                            <div class="tools-list">
+                                <div class="tool-badge">
+                                    <i class="fas fa-pen-fancy"></i> Figma
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-paint-brush"></i> Sketch
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-pencil-ruler"></i> Adobe XD
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-magic"></i> InVision
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-element design-element">
+                        <div class="color-dot" style="background: #6366F1;"></div>
+                        <div class="color-dot" style="background: #8B5CF6;"></div>
+                        <div class="color-dot" style="background: #EC4899;"></div>
+                        <div class="color-dot" style="background: #F43F5E;"></div>
+                        <div class="color-dot" style="background: #F59E0B;"></div>
+                        <div class="color-dot" style="background: #10B981;"></div>
+                        <div class="color-dot" style="background: #3B82F6;"></div>
+                        <div class="color-dot" style="background: #EF4444;"></div>
+                        <div class="color-dot" style="background: #8B5CF6;"></div>
+                    </div>
+                    <canvas class="card-bg-pattern" id="pattern3"></canvas>
+                </div>
+
+                <!-- Stage 4: Development -->
+                <div class="stage-card" data-stage="4">
+                    <div class="card-content">
+                        <div class="stage-number-container">
+                            <div class="stage-count">04</div>
+                            <div class="stage-of-total">of 5</div>
+                            <div class="stage-duration">
+                                <i class="fas fa-clock"></i> 6-12 weeks
+                            </div>
+                        </div>
+
+                        <div class="stage-info">
+                            <h2 class="stage-title">Development</h2>
+                            <p class="stage-subtitle">Building with precision</p>
+                        </div>
+
+                        <div class="stage-details">
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <div class="detail-text">Front-end development with React/Vue</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-server"></i>
+                                    </div>
+                                    <div class="detail-text">Back-end API integration</div>
+                                </div>
+                            </div>
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-universal-access"></i>
+                                    </div>
+                                    <div class="detail-text">Accessibility compliance</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </div>
+                                    <div class="detail-text">Performance optimization</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stage-tools">
+                            <div class="tools-title">
+                                <i class="fas fa-tools"></i> Tools We Use
+                            </div>
+                            <div class="tools-list">
+                                <div class="tool-badge">
+                                    <i class="fas fa-code"></i> VS Code
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-code-branch"></i> Git
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fab fa-react"></i> React
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fab fa-node"></i> Node.js
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-element dev-element">
+                        <div class="code-line"></div>
+                        <div class="code-line"></div>
+                        <div class="code-line"></div>
+                        <div class="code-line"></div>
+                    </div>
+                    <canvas class="card-bg-pattern" id="pattern4"></canvas>
+                </div>
+
+                <!-- Stage 5: Testing & Launch -->
+                <div class="stage-card" data-stage="5">
+                    <div class="card-content">
+                        <div class="stage-number-container">
+                            <div class="stage-count">05</div>
+                            <div class="stage-of-total">of 5</div>
+                            <div class="stage-duration">
+                                <i class="fas fa-clock"></i> 2-4 weeks
+                            </div>
+                        </div>
+
+                        <div class="stage-info">
+                            <h2 class="stage-title">Testing & Launch</h2>
+                            <p class="stage-subtitle">Ensuring quality and success</p>
+                        </div>
+
+                        <div class="stage-details">
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="detail-text">Cross-browser and device testing</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-user-check"></i>
+                                    </div>
+                                    <div class="detail-text">User acceptance testing</div>
+                                </div>
+                            </div>
+                            <div class="details-column">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </div>
+                                    <div class="detail-text">Performance and load testing</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="detail-text">Analytics implementation</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stage-tools">
+                            <div class="tools-title">
+                                <i class="fas fa-tools"></i> Tools We Use
+                            </div>
+                            <div class="tools-list">
+                                <div class="tool-badge">
+                                    <i class="fas fa-window-maximize"></i> BrowserStack
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-tachometer-alt"></i> Lighthouse
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-flask"></i> Google Optimize
+                                </div>
+                                <div class="tool-badge">
+                                    <i class="fas fa-bug"></i> Sentry
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-element testing-element">
+                        <div class="checkmark"></div>
+                    </div>
+                    <canvas class="card-bg-pattern" id="pattern5"></canvas>
+                </div>
+
+                <!-- Desktop Mini Card Previews (right side) -->
+                <div class="mini-cards-container" id="miniCardsDesktop">
+                    <div class="mini-card active" data-index="0">
+                        <div class="mini-card-number">01</div>
+                        <div class="mini-card-label">Research</div>
+                    </div>
+                    <div class="mini-card" data-index="1">
+                        <div class="mini-card-number">02</div>
+                        <div class="mini-card-label">Strategy</div>
+                    </div>
+                    <div class="mini-card" data-index="2">
+                        <div class="mini-card-number">03</div>
+                        <div class="mini-card-label">Design</div>
+                    </div>
+                    <div class="mini-card" data-index="3">
+                        <div class="mini-card-number">04</div>
+                        <div class="mini-card-label">Development</div>
+                    </div>
+                    <div class="mini-card" data-index="4">
+                        <div class="mini-card-number">05</div>
+                        <div class="mini-card-label">Testing</div>
+                    </div>
+                </div>
+
+                <!-- Tablet/Mobile Mini Card Previews (bottom) -->
+                <div class="bottom-mini-cards" id="miniCardsTablet">
+                    <div class="mini-card active" data-index="0">
+                        <div class="mini-card-number">01</div>
+                        <div class="mini-card-label">Research</div>
+                    </div>
+                    <div class="mini-card" data-index="1">
+                        <div class="mini-card-number">02</div>
+                        <div class="mini-card-label">Strategy</div>
+                    </div>
+                    <div class="mini-card" data-index="2">
+                        <div class="mini-card-number">03</div>
+                        <div class="mini-card-label">Design</div>
+                    </div>
+                    <div class="mini-card" data-index="3">
+                        <div class="mini-card-number">04</div>
+                        <div class="mini-card-label">Development</div>
+                    </div>
+                    <div class="mini-card" data-index="4">
+                        <div class="mini-card-number">05</div>
+                        <div class="mini-card-label">Testing</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <button class="nav-button" id="prevButton">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="nav-dots" id="navDots">
+                    <div class="nav-dot active" data-index="0"></div>
+                    <div class="nav-dot" data-index="1"></div>
+                    <div class="nav-dot" data-index="2"></div>
+                    <div class="nav-dot" data-index="3"></div>
+                    <div class="nav-dot" data-index="4"></div>
+                </div>
+                <button class="nav-button" id="nextButton">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/version3.js"></script>
+    <script src="js/process.js"></script>
 </body>
 </html>
