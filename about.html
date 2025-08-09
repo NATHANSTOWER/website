@@ -8,44 +8,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200..700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Inter', sans-serif;
-            --primary: #0f0f0f;
-            --yellow: #eab308;
-        }
-        body { font-family: var(--font-sans); color: var(--primary); }
-        .font-serif { font-family: var(--font-serif); }
-        .container-centered { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-        .prose { max-width: 65ch; margin: auto; }
-        .prose h2 { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem; }
-        .prose p { margin-bottom: 1.5rem; line-height: 1.75; }
-        .prose blockquote { border-left: 4px solid var(--yellow); padding-left: 1rem; margin-left: 0; font-style: italic; }
-    </style>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="bg-gray-50">
 
-    <header id="page-header" role="banner">
-        <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50" role="navigation">
-            <div class="container-centered py-5 flex items-center justify-between">
-                <div class="text-2xl font-serif tracking-tight">
-                    <a href="/" class="focus-ring px-3 py-1 rounded-lg">Nathan</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <ul class="flex items-center space-x-8" role="menubar">
-                        <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Work</a></li>
-                        <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Insights</a></li>
-                        <li role="none"><a href="leadership.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Leadership</a></li>
-                        <li role="none"><a href="process.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Process</a></li>
-                        <li role="none"><a href="about.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">About</a></li>
-                        <li role="none"><a href="faq.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">FAQ</a></li>
-                        <li role="none"><a href="/#contact" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Contact</a></li>
-                    </ul>
-                </div>
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50 layer-elevated" role="navigation">
+        <div class="container-centered py-5 flex items-center justify-between">
+            <div class="text-2xl font-serif tracking-tight reveal">
+                <a href="#" class="focus-ring stroke-interactive px-3 py-1 rounded-lg">Nathan</a>
             </div>
-        </nav>
-    </header>
+
+            <div class="hidden md:flex items-center space-x-6">
+                <ul class="hidden md:flex items-center space-x-8" role="menubar">
+                    <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Work</a></li>
+                    <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Insights</a></li>
+                    <li role="none"><a href="leadership.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Leadership</a></li>
+                    <li role="none"><a href="process.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Process</a></li>
+                    <li role="none"><a href="about.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">About</a></li>
+                    <li role="none"><a href="faq.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">FAQ</a></li>
+                    <li role="none"><a href="#contact" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Contact</a></li>
+                </ul>
+
+                <button id="themeToggle" aria-label="Toggle dark mode" class="w-6 h-6 reveal delay-2 focus-ring stroke-interactive p-2 rounded-lg">
+                    <svg id="sun" class="w-full h-full" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                    </svg>
+                    <svg id="mobileMoon" class="w-full h-full hidden" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
 
     <main id="main-content" class="pt-32 pb-16">
         <div class="container-centered">
@@ -79,9 +73,20 @@
         </div>
     </main>
 
-    <footer class="py-16 border-t">
-        <div class="container-centered text-center text-sm text-gray-500">
+    <footer class="py-16 border-t border-minimal" role="contentinfo">
+        <div class="container-centered flex flex-col md:flex-row justify-between items-center text-sm font-light text-gray-500">
             <p>© 2024 Nathan Stower. All rights reserved.</p>
+            <div class="flex items-center space-x-6 mt-4 md:mt-0">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
         </div>
     </footer>
 
