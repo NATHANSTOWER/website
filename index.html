@@ -37,6 +37,7 @@
             <div class="hidden md:flex items-center space-x-6">
                 <ul class="hidden md:flex items-center space-x-8" role="menubar">
                     <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Work</a></li>
+                    <li role="none"><a href="growth-sprint.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Services</a></li>
                     <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Insights</a></li>
                     <li role="none"><a href="leadership.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Leadership</a></li>
                     <li role="none"><a href="process.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Process</a></li>
@@ -73,6 +74,7 @@
         <div class="md:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="work.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Work</a>
+                <a href="growth-sprint.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Services</a>
                 <a href="insights.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Insights</a>
                 <a href="leadership.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Leadership</a>
                 <a href="process.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Process</a>
@@ -89,11 +91,6 @@
             <div id="hero-cube-renderer" class="w-full h-full"></div>
             <div id="physics-experience" class="w-full h-full hidden">
                 <canvas id="webgl-canvas"></canvas>
-            </div>
-            <div class="absolute top-4 right-4 z-10 flex space-x-2">
-                <button id="scramble-btn" class="bg-white/50 backdrop-blur-sm text-black px-4 py-2 rounded-full font-medium text-sm shadow-lg">Scramble</button>
-                <button id="solve-btn" class="bg-white/50 backdrop-blur-sm text-black px-4 py-2 rounded-full font-medium text-sm shadow-lg" disabled>Solve</button>
-                <button id="toggle-animation" class="bg-white/50 backdrop-blur-sm text-black px-4 py-2 rounded-full font-medium text-sm shadow-lg">Toggle Animation</button>
             </div>
         </div>
 
@@ -148,13 +145,13 @@
                                 <span>4.9/5 client satisfaction</span>
                             </div>
                             <span>150+ projects delivered</span>
-                            <span class="text-green-600 font-medium">✓ Available June 2024</span>
+                            <span id="availability-date-1" class="text-green-600 font-medium">✓ Available June 2024</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Stats Sidebar - 2 columns -->
-                <div class="lg:col-span-2 reveal delay-4">
+                <div id="proven-results" class="lg:col-span-2 reveal delay-4">
                     <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-gray-200/50">
                         <div class="text-center mb-6">
                             <h3 class="text-xl font-serif text-gray-900 mb-2">Proven Results</h3>
@@ -712,7 +709,7 @@
                         <i class="fas fa-calendar-check text-green-600"></i>
                     </div>
                     <h3 class="font-medium mb-2">Next availability</h3>
-                    <p class="text-gray-600">June 2024<br>
+                    <p id="availability-date-2" class="text-gray-600">June 2024<br>
                     <span class="text-sm text-green-600 font-medium">2 spots remaining</span></p>
                 </div>
             </div>

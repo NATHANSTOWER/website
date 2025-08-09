@@ -99,4 +99,58 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
         });
     }
+
+    // Stat counter animation
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    const statsContainer = document.getElementById('proven-results');
+
+    if (statsContainer) {
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = statsContainer.querySelectorAll('.stat-counter');
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        animateValue(counter, 0, target, 1500);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+        observer.observe(statsContainer);
+    }
+
+    // Dynamic date update
+    const updateAvailabilityDate = () => {
+        const date = new Date();
+        const month = date.toLocaleString('default', { month: 'long' });
+        const year = date.getFullYear();
+        const formattedDate = `${month} ${year}`;
+
+        const dateElement1 = document.getElementById('availability-date-1');
+        if (dateElement1) {
+            dateElement1.textContent = `✓ Available ${formattedDate}`;
+        }
+
+        const dateElement2 = document.getElementById('availability-date-2');
+        if (dateElement2) {
+            dateElement2.childNodes[0].nodeValue = `${formattedDate}`;
+        }
+    };
+
+    updateAvailabilityDate();
 });

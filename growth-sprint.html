@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Sprint (90 Days) — A Service by Nathan Stower</title>
+    <meta name="description" content="A 90-day growth sprint to deliver a prioritised roadmap, shipped improvements, and measurable lift for your business.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200..700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/growth-sprint.css">
+</head>
+
+<body class="bg-white text-gray-900 antialiased">
+
+    <div class="progress-bar" role="progressbar" aria-label="Page scroll progress"></div>
+
+    <a href="#contact" class="fab" aria-label="Get in touch" title="Contact me">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+        </svg>
+    </a>
+
+    <div id="loader" role="status" aria-label="Loading"></div>
+    <div id="cursor" aria-hidden="true"></div>
+
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50 layer-elevated" role="navigation">
+        <div class="container-centered py-5 flex items-center justify-between">
+            <div class="text-2xl font-serif tracking-tight reveal">
+                <a href="index.html" class="focus-ring stroke-interactive px-3 py-1 rounded-lg">Nathan</a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6">
+                <ul class="hidden md:flex items-center space-x-8" role="menubar">
+                    <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Work</a></li>
+                    <li role="none"><a href="growth-sprint.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Services</a></li>
+                    <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Insights</a></li>
+                    <li role="none"><a href="leadership.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Leadership</a></li>
+                    <li role="none"><a href="process.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Process</a></li>
+                    <li role="none"><a href="about.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">About</a></li>
+                    <li role="none"><a href="faq.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">FAQ</a></li>
+                    <li role="none"><a href="#contact" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Contact</a></li>
+                </ul>
+
+                <button id="themeToggle" aria-label="Toggle dark mode" class="w-6 h-6 reveal delay-2 focus-ring stroke-interactive p-2 rounded-lg">
+                    <svg id="sun" class="w-full h-full" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                    </svg>
+                    <svg id="mobileMoon" class="w-full h-full hidden" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-900 hover:text-black hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-500" aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="work.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Work</a>
+                <a href="growth-sprint.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Services</a>
+                <a href="insights.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Insights</a>
+                <a href="leadership.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Leadership</a>
+                <a href="process.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Process</a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">About</a>
+                <a href="faq.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">FAQ</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-black hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="py-20 md:py-32 bg-gray-50">
+            <div class="container-centered">
+                <div class="text-sm text-gray-500 mb-8 animate-on-scroll animate-fade-in">
+                    <a href="index.html" class="hover:text-yellow-600">Home</a>
+                    <span class="mx-2">/</span>
+                    <span>Services</span>
+                </div>
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-6xl font-serif font-light mb-4 animate-on-scroll animate-slide-in-up">Growth Sprint (90 Days)</h1>
+                    <p class="text-xl md:text-2xl font-light text-gray-600 max-w-3xl mx-auto animate-on-scroll animate-slide-in-up" style="animation-delay: 0.2s;">A focused 90-day engagement to deliver a prioritised roadmap, shipped improvements, and measurable lift.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 md:py-24">
+            <div class="container-centered">
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="p-8 animate-on-scroll animate-fade-in" style="animation-delay: 0.3s;">
+                        <h3 class="text-2xl font-serif mb-2">Prioritised Roadmap</h3>
+                        <p class="text-gray-600">Clear, actionable steps based on data and impact.</p>
+                    </div>
+                    <div class="p-8 animate-on-scroll animate-fade-in" style="animation-delay: 0.4s;">
+                        <h3 class="text-2xl font-serif mb-2">Shipped Improvements</h3>
+                        <p class="text-gray-600">I don't just advise—I help ship the work.</p>
+                    </div>
+                    <div class="p-8 animate-on-scroll animate-fade-in" style="animation-delay: 0.5s;">
+                        <h3 class="text-2xl font-serif mb-2">Measurable Lift</h3>
+                        <p class="text-gray-600">Decisions driven by data, with clear before-and-after metrics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 md:py-24 bg-gray-50">
+            <div class="container-centered">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-serif font-light animate-on-scroll animate-fade-in">What You Get</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="p-8 rounded-lg bg-white shadow-md service-card animate-on-scroll animate-fade-in" style="animation-delay: 0.2s;">
+                        <h3 class="text-2xl font-serif mb-4">Deliverables</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start"><svg class="animated-check w-6 h-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>KPI tree</span></li>
+                            <li class="flex items-start"><svg class="animated-check w-6 h-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Opportunity map</span></li>
+                            <li class="flex items-start"><svg class="animated-check w-6 h-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Test backlog</span></li>
+                            <li class="flex items-start"><svg class="animated-check w-6 h-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Weekly experiment results</span></li>
+                            <li class="flex items-start"><svg class="animated-check w-6 h-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Final report</span></li>
+                        </ul>
+                    </div>
+                    <div class="p-8 rounded-lg bg-white shadow-md service-card animate-on-scroll animate-fade-in" style="animation-delay: 0.4s;">
+                        <h3 class="text-2xl font-serif mb-4">Included</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start"><svg class="animated-check w-6 h-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Weekly standup</span></li>
+                            <li class="flex items-start"><svg class="animated-check w-6 h-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Async comms (Slack/Email)</span></li>
+                            <li class="flex items-start"><svg class="animated-check w-6 h-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Analytics setup/cleanup</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 md:py-24">
+            <div class="container-centered">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-serif font-light animate-on-scroll animate-fade-in">The 90-Day Process</h2>
+                </div>
+                <div class="relative timeline-line">
+                    <div class="timeline-line-progress"></div>
+                    <div class="grid md:grid-cols-2 gap-x-12">
+                        <div class="mb-12 md:mb-0 timeline-item">
+                            <div class="md:text-right md:pr-12">
+                                <h4 class="text-xl font-serif text-yellow-600 mb-2">Weeks 0-2</h4>
+                                <h3 class="text-2xl font-serif mb-3">Discovery</h3>
+                                <p class="text-gray-600">Goals, constraints, success metrics. Analytics sanity check, baselines, funnel map.</p>
+                            </div>
+                        </div>
+                        <div></div>
+
+                        <div></div>
+                        <div class="mb-12 md:mb-0 timeline-item">
+                            <div class="md:pl-12">
+                                <h4 class="text-xl font-serif text-yellow-600 mb-2">Weeks 3-4</h4>
+                                <h3 class="text-2xl font-serif mb-3">Design</h3>
+                                <p class="text-gray-600">Opportunity scoring (impact × effort). Experiment backlog and measurement plan.</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-12 md:mb-0 timeline-item">
+                            <div class="md:text-right md:pr-12">
+                                <h4 class="text-xl font-serif text-yellow-600 mb-2">Weeks 5-10</h4>
+                                <h3 class="text-2xl font-serif mb-3">Deliver</h3>
+                                <p class="text-gray-600">Ship 1–2 improvements per week. Read, learn, iterate.</p>
+                            </div>
+                        </div>
+                        <div></div>
+
+                        <div></div>
+                        <div class="timeline-item">
+                             <div class="md:pl-12">
+                                <h4 class="text-xl font-serif text-yellow-600 mb-2">Weeks 11-12</h4>
+                                <h3 class="text-2xl font-serif mb-3">Prove</h3>
+                                <p class="text-gray-600">Results rollup, before/after graphs. What’s next plan (keep, kill, double-down).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="text-center mt-16 animate-on-scroll animate-fade-in">
+                    <p class="text-lg text-gray-600"><strong>Cadence:</strong> weekly standup, async Slack/Email, shared dashboard.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 md:py-32 bg-gray-50">
+            <div class="container-centered max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-serif font-light mb-4 animate-on-scroll animate-fade-in">Ready to make the next 90 days count?</h2>
+                <p class="text-lg text-gray-600 mb-8 animate-on-scroll animate-fade-in" style="animation-delay: 0.2s;">Two strategy sessions open this month. Book yours.</p>
+                <a href="mailto:hello@nathanstower.com.au" class="cta-button-enhanced inline-block bg-yellow-500 text-black px-10 py-4 font-semibold text-lg rounded-lg transition-all duration-300 transform hover:scale-105 shadow-xl animate-on-scroll animate-fade-in" style="animation-delay: 0.4s;">
+                    Book a 30-min Strategy Call
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-16 border-t border-minimal" role="contentinfo">
+        <div class="container-centered flex flex-col md:flex-row justify-between items-center text-sm font-light text-gray-500">
+            <p>© 2024 Nathan Stower. All rights reserved.</p>
+            <div class="flex items-center space-x-6 mt-4 md:mt-0">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/growth-sprint.js"></script>
+</body>
+</html>
