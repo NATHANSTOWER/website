@@ -617,3 +617,14 @@ p {
         background-clip: content-box;
     }
 }
+
+.cta-button-enhanced:hover {
+  background-color: #d99f07;
+  box-shadow: 0 4px 14px 0 rgba(0,0,0,0.1);
+}
+
+#mobile-menu {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
