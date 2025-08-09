@@ -8,160 +8,37 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200..700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Inter', sans-serif;
-            --primary: #0f0f0f;
-            --primary-light: #1e1e1e;
-            --secondary: #fafafa;
-            --accent: #888;
-            --accent-light: #e5e5e5;
-            --yellow: #eab308;
-            --yellow-light: rgba(234, 179, 8, 0.1);
-            --white: #ffffff;
-            --transition: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --transition-fast: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.05);
-            --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-medium: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-strong: 0 20px 40px -4px rgba(0, 0, 0, 0.1), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
-            --shadow-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 12px 24px -8px rgba(0, 0, 0, 0.08);
-            --stroke-subtle: 0.5px solid rgba(0, 0, 0, 0.08);
-            --stroke-medium: 0.5px solid rgba(0, 0, 0, 0.15);
-            --stroke-accent: 0.5px solid var(--yellow);
-            --stroke-hover: 0.5px solid rgba(234, 179, 8, 0.6);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            font-weight: 300;
-            letter-spacing: -0.01em;
-            line-height: 1.6;
-            color: var(--primary);
-            background-color: var(--white);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-
-        .font-serif { font-family: var(--font-serif); }
-        .text-hero { font-size: clamp(3.5rem, 8vw, 8.5rem); line-height: 0.9; }
-        .text-large { font-size: clamp(1.25rem, 3vw, 2.25rem); }
-        .text-display { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; }
-
-        .focus-ring:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.3);
-            border-radius: 0.25rem;
-        }
-
-        section { scroll-margin-top: 100px; }
-
-        .reveal {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .faq-section {
-            background: #fafafa;
-            border-radius: 1rem;
-            overflow: hidden;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-
-        .faq-question {
-            width: 100%;
-            padding: 1.5rem;
-            text-align: left;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-family: var(--font-serif);
-            font-size: 1.125rem;
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: rgba(234, 179, 8, 0.05);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: white;
-        }
-
-        .faq-answer.active {
-            max-height: 200px;
-        }
-
-        .faq-answer-content {
-            padding: 0 1.5rem 1.5rem 1.5rem;
-            color: var(--accent);
-            line-height: 1.6;
-        }
-
-        .nav-link.active {
-            color: var(--primary) !important;
-            font-weight: 500;
-            position: relative;
-        }
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--yellow);
-        }
-    </style>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="bg-white text-gray-900 antialiased">
-    <header id="page-header" role="banner">
-        <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50 layer-elevated" role="navigation">
-            <div class="container-centered py-5 flex items-center justify-between">
-                <div class="text-2xl font-serif tracking-tight reveal">
-                    <a href="/" class="focus-ring stroke-interactive px-3 py-1 rounded-lg">Nathan</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <ul class="hidden md:flex items-center space-x-8" role="menubar">
-                        <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Work</a></li>
-                        <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Insights</a></li>
-                        <li role="none"><a href="leadership.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Leadership</a></li>
-                        <li role="none"><a href="process.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Process</a></li>
-                        <li role="none"><a href="about.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">About</a></li>
-                        <li role="none"><a href="faq.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">FAQ</a></li>
-                        <li role="none"><a href="/#contact" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Contact</a></li>
-                    </ul>
-                </div>
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50 layer-elevated" role="navigation">
+        <div class="container-centered py-5 flex items-center justify-between">
+            <div class="text-2xl font-serif tracking-tight reveal">
+                <a href="#" class="focus-ring stroke-interactive px-3 py-1 rounded-lg">Nathan</a>
             </div>
-        </nav>
-    </header>
+
+            <div class="hidden md:flex items-center space-x-6">
+                <ul class="hidden md:flex items-center space-x-8" role="menubar">
+                    <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Work</a></li>
+                    <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Insights</a></li>
+                    <li role="none"><a href="leadership.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Leadership</a></li>
+                    <li role="none"><a href="process.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Process</a></li>
+                    <li role="none"><a href="about.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">About</a></li>
+                    <li role="none"><a href="faq.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">FAQ</a></li>
+                    <li role="none"><a href="#contact" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Contact</a></li>
+                </ul>
+
+                <button id="themeToggle" aria-label="Toggle dark mode" class="w-6 h-6 reveal delay-2 focus-ring stroke-interactive p-2 rounded-lg">
+                    <svg id="sun" class="w-full h-full" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                    </svg>
+                    <svg id="mobileMoon" class="w-full h-full hidden" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
 
     <main id="main-content">
         <section id="faq" class="py-32">

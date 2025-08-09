@@ -2,22 +2,713 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Redirecting...</title>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const version = urlParams.get('v');
-
-        if (version === '2') {
-            window.location.replace('index-v2.html');
-        } else if (version === '3') {
-            window.location.replace('index-v3.html');
-        }
-        else {
-            window.location.replace('index-v1.html');
-        }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nathan Stower — Strategic Design for Ambitious Businesses</title>
+    <meta name="description" content="Strategic digital consultant specializing in user experience design and business transformation. 250%+ ROI increase guaranteed. Based in Brisbane, working globally.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200..700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
-<body>
-    <p>Redirecting to the correct version of the site...</p>
+
+<body class="bg-white text-gray-900 antialiased">
+    <div class="progress-bar" role="progressbar" aria-label="Page scroll progress"></div>
+
+    <a href="#contact" class="fab" aria-label="Get in touch" title="Contact me">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+        </svg>
+    </a>
+
+    <div id="loader" role="status" aria-label="Loading"></div>
+    <div id="cursor" aria-hidden="true"></div>
+
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-xl z-50 layer-elevated" role="navigation">
+        <div class="container-centered py-5 flex items-center justify-between">
+            <div class="text-2xl font-serif tracking-tight reveal">
+                <a href="#" class="focus-ring stroke-interactive px-3 py-1 rounded-lg">Nathan</a>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-6">
+                <ul class="hidden md:flex items-center space-x-8" role="menubar">
+                    <li role="none"><a href="work.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Work</a></li>
+                    <li role="none"><a href="insights.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Insights</a></li>
+                    <li role="none"><a href="leadership.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Leadership</a></li>
+                    <li role="none"><a href="process.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Process</a></li>
+                    <li role="none"><a href="about.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">About</a></li>
+                    <li role="none"><a href="faq.html" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">FAQ</a></li>
+                    <li role="none"><a href="#contact" class="nav-link text-sm text-gray-600 hover:text-black transition-all" role="menuitem">Contact</a></li>
+                </ul>
+
+                <button id="themeToggle" aria-label="Toggle dark mode" class="w-6 h-6 reveal delay-2 focus-ring stroke-interactive p-2 rounded-lg">
+                    <svg id="sun" class="w-full h-full" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                    </svg>
+                    <svg id="mobileMoon" class="w-full h-full hidden" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex items-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white" role="banner">
+        <!-- 3D Visual Container -->
+        <div class="absolute top-0 right-0 w-3/5 h-full" aria-hidden="true">
+            <div id="hero-cube-renderer" class="w-full h-full"></div>
+            <div id="physics-experience" class="w-full h-full hidden">
+                <canvas id="webgl-canvas"></canvas>
+            </div>
+            <div class="absolute top-4 right-4 z-10 flex space-x-2">
+                <button id="scramble-btn" class="bg-white/50 backdrop-blur-sm text-black px-4 py-2 rounded-full font-medium text-sm shadow-lg">Scramble</button>
+                <button id="solve-btn" class="bg-white/50 backdrop-blur-sm text-black px-4 py-2 rounded-full font-medium text-sm shadow-lg" disabled>Solve</button>
+                <button id="toggle-animation" class="bg-white/50 backdrop-blur-sm text-black px-4 py-2 rounded-full font-medium text-sm shadow-lg">Toggle Animation</button>
+            </div>
+        </div>
+
+        <div class="container-centered py-32 relative z-20 w-full">
+            <div class="grid lg:grid-cols-5 gap-16 items-center min-h-[70vh]">
+
+                <!-- Main Content - 3 columns -->
+                <div class="lg:col-span-3 space-y-8">
+
+                    <!-- Availability Banner -->
+                    <div class="reveal">
+                        <div class="inline-flex items-center bg-yellow-400 text-black px-4 py-2 rounded-full font-medium text-sm shadow-lg">
+                            <div class="w-2 h-2 bg-black rounded-full mr-2 animate-pulse"></div>
+                            Limited spots: 2 strategy sessions available this month
+                        </div>
+                    </div>
+
+                    <!-- Balanced Headline -->
+                    <div class="reveal delay-1">
+                        <h1 class="font-serif leading-tight text-black mb-4" style="font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 300;">
+                            Strategic design
+                        </h1>
+                        <h2 class="font-serif italic leading-tight mb-8" style="font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 500; background: linear-gradient(135deg, #eab308 0%, #f59e0b 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">
+                            for ambitious businesses
+                        </h2>
+                    </div>
+
+                    <!-- Value Proposition -->
+                    <div class="reveal delay-2">
+                        <p class="text-2xl font-light text-gray-700 leading-relaxed mb-8">
+                            Increase conversions by <span class="font-bold text-black text-3xl">250%+</span> through strategic UX design and data-driven optimization.
+                        </p>
+                    </div>
+
+                    <!-- CTA and Trust -->
+                    <div class="reveal delay-3 space-y-6">
+                        <a href="#contact" class="inline-block bg-black hover:bg-gray-800 text-white px-10 py-4 font-semibold text-lg rounded-lg transition-all duration-300 transform hover:scale-105 shadow-xl">
+                            Book Strategy Call
+                            <div class="text-sm font-normal opacity-80 mt-1">Free 30-min consultation</div>
+                        </a>
+
+                        <!-- Trust Row -->
+                        <div class="flex flex-wrap items-center gap-6 text-sm text-gray-600">
+                            <div class="flex items-center gap-2">
+                                <div class="flex text-yellow-500">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>4.9/5 client satisfaction</span>
+                            </div>
+                            <span>150+ projects delivered</span>
+                            <span class="text-green-600 font-medium">✓ Available June 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Sidebar - 2 columns -->
+                <div class="lg:col-span-2 reveal delay-4">
+                    <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-gray-200/50">
+                        <div class="text-center mb-6">
+                            <h3 class="text-xl font-serif text-gray-900 mb-2">Proven Results</h3>
+                            <p class="text-sm text-gray-600">Measurable impact across 150+ projects</p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl">
+                                <div class="stat-counter text-3xl font-serif font-light text-black mb-1" data-target="250">0</div>
+                                <div class="text-xs font-semibold text-yellow-700 uppercase tracking-wide">ROI %</div>
+                            </div>
+
+                            <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
+                                <div class="stat-counter text-3xl font-serif font-light text-black mb-1" data-target="150">0</div>
+                                <div class="text-xs font-semibold text-blue-700 uppercase tracking-wide">Projects</div>
+                            </div>
+
+                            <div class="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl">
+                                <div class="stat-counter text-3xl font-serif font-light text-black mb-1" data-target="98">0</div>
+                                <div class="text-xs font-semibold text-green-700 uppercase tracking-wide">Satisfaction</div>
+                            </div>
+
+                            <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                                <div class="stat-counter text-3xl font-serif font-light text-black mb-1" data-target="5">0</div>
+                                <div class="text-xs font-semibold text-purple-700 uppercase tracking-wide">Years</div>
+                            </div>
+                        </div>
+
+                        <!-- Key Testimonial -->
+                        <div class="mt-6 pt-4 border-t border-gray-200">
+                            <blockquote class="text-sm italic text-gray-600 mb-2">
+                                "340% conversion increase in 3 months. Game-changing results."
+                            </blockquote>
+                            <footer class="text-xs text-gray-500">
+                                <strong>Sarah Chen</strong>, VP Product, TechFlow
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subtle Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 reveal delay-4">
+            <i class="fas fa-chevron-down text-gray-400 text-sm animate-bounce"></i>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 relative overflow-hidden">
+        <div class="container-centered">
+            <div class="absolute top-20 right-20 w-64 h-64 bg-gray-100 rounded-full opacity-30 parallax-slow" aria-hidden="true"></div>
+            <div class="absolute bottom-20 left-20 w-32 h-32 bg-yellow-400 rounded-full opacity-20 parallax-fast" aria-hidden="true"></div>
+
+            <div class="grid lg:grid-cols-12 gap-16 items-center relative z-10">
+                <div class="lg:col-span-7 reveal">
+                    <div class="max-w-2xl">
+                        <div class="text-sm font-light text-gray-500 uppercase tracking-wide mb-6">Philosophy</div>
+                        <h2 class="text-5xl lg:text-6xl font-serif font-light mb-8 leading-tight">
+                            Strategy is<br/>
+                            <em class="text-gray-600">invisible design</em>
+                        </h2>
+                        <p class="text-xl font-light text-gray-600 leading-relaxed mb-8">
+                            The best solutions feel inevitable. They emerge from deep understanding of context, constraint, and human need—creating experiences that seem effortlessly simple yet are sophisticatedly complex underneath.
+                        </p>
+
+                        <div class="space-y-8">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-2 h-2 bg-black rounded-full mt-3 flex-shrink-0" aria-hidden="true"></div>
+                                <div>
+                                    <h3 class="font-medium mb-2">Questions before solutions</h3>
+                                    <p class="text-sm font-light text-gray-600">Every project begins with deep inquiry into your business context, user behaviors, and market dynamics.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-2 h-2 bg-yellow-400 rounded-full mt-3 flex-shrink-0" aria-hidden="true"></div>
+                                <div>
+                                    <h3 class="font-medium mb-2">Human-centered complexity</h3>
+                                    <p class="text-sm font-light text-gray-600">Sophisticated systems designed to feel intuitive, reducing cognitive load while maximizing capability.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-2 h-2 bg-gray-400 rounded-full mt-3 flex-shrink-0" aria-hidden="true"></div>
+                                <div>
+                                    <h3 class="font-medium mb-2">Measurable outcomes</h3>
+                                    <p class="text-sm font-light text-gray-600">Strategic decisions validated through data, user feedback, and business performance metrics.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 reveal delay-1">
+                    <figure class="layer-floating rounded-2xl p-8 lg:p-12 relative">
+                        <div class="results-metrics">
+                            <span class="metric">+340% conversions</span>
+                            <span class="timeframe">in 3 months</span>
+                        </div>
+                        <div class="text-6xl font-serif text-gray-300 absolute top-4 left-6" aria-hidden="true">"</div>
+                        <blockquote class="text-lg font-light leading-relaxed text-gray-700 mb-6 relative z-10 pt-8">
+                            Nathan's strategic approach transformed our entire digital presence. He doesn't just design interfaces—he architected our entire user experience strategy. The results speak for themselves: 340% increase in conversions within three months.
+                        </blockquote>
+                        <figcaption class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gray-300 rounded-full layer-elevated" aria-hidden="true"></div>
+                            <div>
+                                <div class="font-medium text-gray-900">Sarah Chen</div>
+                                <div class="text-sm font-light text-gray-600">VP Product, TechFlow</div>
+                            </div>
+                        </figcaption>
+                    </figure>
+
+                    <div class="mt-8 text-center lg:text-left">
+                        <div class="text-sm font-light text-gray-500 mb-2">Based in Brisbane, working globally</div>
+                        <div class="inline-flex items-center space-x-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm layer-elevated">
+                            <div class="w-2 h-2 bg-green-600 rounded-full animate-pulse" aria-hidden="true"></div>
+                            <span>Available for new projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="py-32 parallax-fast">
+        <div class="container-centered">
+            <header class="text-center mb-20 reveal">
+                <h2 class="text-5xl font-serif font-light mb-4">Selected expertise</h2>
+                <div class="w-20 h-px bg-black mx-auto"></div>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-20 auto-rows-auto">
+
+                <!-- Featured Service - Digital Strategy -->
+                <article class="lg:col-span-3 lg:row-span-2 bg-black text-white rounded-lg p-8 service-card card-stack reveal delay-1" data-service="digital-strategy">
+                    <div class="service-icon w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-sitemap text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-light mb-4">Digital Strategy & Transformation</h3>
+                    <p class="font-light text-gray-300 mb-6 leading-relaxed">Comprehensive strategies that align technology with human behavior, creating measurable business outcomes through thoughtful design decisions.</p>
+
+                    <div class="results-metrics mb-4">
+                        <span class="metric bg-yellow-600 text-white border-yellow-600">Average 250% ROI</span>
+                        <span class="timeframe text-gray-400">within 6 months</span>
+                    </div>
+
+                    <ul class="space-y-2 text-sm font-light text-gray-400">
+                        <li>Strategic planning & roadmapping</li>
+                        <li>User research & behavioral analysis</li>
+                        <li>Digital ecosystem architecture</li>
+                        <li>Performance measurement & optimization</li>
+                    </ul>
+                </article>
+
+                <!-- Experience Design -->
+                <article class="lg:col-span-2 bg-gray-50 rounded-lg p-6 service-card enhanced-hover reveal delay-2" data-service="experience-design">
+                    <div class="service-icon w-10 h-10 bg-black rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-user-circle text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-serif mb-3">Experience Design</h3>
+                    <p class="text-sm font-light text-gray-600 leading-relaxed mb-3">Human-centered design that creates meaningful connections between people and products.</p>
+                    <div class="text-xs text-yellow-600 font-medium">40%+ engagement increase typical</div>
+                </article>
+
+                <!-- Conversion Optimization - Mustard Yellow -->
+                <article class="bg-yellow-400 text-gray-900 rounded-lg p-6 service-card enhanced-hover reveal delay-2" data-service="conversion-optimization">
+                    <div class="service-icon w-10 h-10 bg-gray-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-lg font-serif mb-3">Conversion Optimization</h3>
+                    <p class="text-sm font-light leading-relaxed mb-2">Data-driven testing for maximum ROI.</p>
+                    <div class="text-xs font-bold">Average 40% lift in 90 days</div>
+                </article>
+
+                <!-- Brand Systems -->
+                <article class="lg:col-span-2 bg-gray-50 rounded-lg p-6 service-card enhanced-hover reveal delay-3" data-service="brand-systems">
+                    <div class="service-icon w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-palette text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-serif mb-3">Brand Systems</h3>
+                    <p class="text-sm font-light text-gray-600 leading-relaxed mb-3">Cohesive visual and strategic frameworks that communicate with clarity and purpose.</p>
+                    <div class="text-xs text-yellow-600 font-medium">Complete brand consistency</div>
+                </article>
+
+                <!-- Research & Analysis -->
+                <article class="bg-gray-50 rounded-lg p-6 service-card enhanced-hover reveal delay-3" data-service="research">
+                    <div class="service-icon w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-bar text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-serif mb-3">Research & Analysis</h3>
+                    <p class="text-sm font-light text-gray-600 leading-relaxed mb-2">Data-driven insights that inform strategic decisions.</p>
+                    <div class="text-xs text-yellow-600 font-medium">Actionable insights guaranteed</div>
+                </article>
+
+                <!-- Web Development -->
+                <article class="bg-gray-50 rounded-lg p-6 service-card enhanced-hover reveal delay-4" data-service="development">
+                    <div class="service-icon w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-serif mb-3">Development</h3>
+                    <p class="text-sm font-light text-gray-600 leading-relaxed mb-2">Technical implementation with attention to detail.</p>
+                    <div class="text-xs text-yellow-600 font-medium">Pixel-perfect execution</div>
+                </article>
+
+                <!-- Quick Wins -->
+                <article class="bg-gray-50 rounded-lg p-6 service-card enhanced-hover reveal delay-4" data-service="quick-wins">
+                    <div class="service-icon w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-rocket text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-serif mb-3">Quick Wins</h3>
+                    <p class="text-sm font-light text-gray-600 leading-relaxed mb-2">Immediate optimizations for rapid impact.</p>
+                    <div class="text-xs text-yellow-600 font-medium">Results in 30 days</div>
+                </article>
+
+                <!-- Strategic Consultation -->
+                <article class="lg:col-span-3 bg-gray-50 rounded-lg p-6 service-card enhanced-hover reveal delay-1" data-service="consultation">
+                    <div class="service-icon w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chess-queen text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-serif mb-3">Strategic Consultation</h3>
+                    <p class="font-light text-gray-600 mb-4 leading-relaxed">Executive advisory for complex digital challenges and organizational transformation initiatives.</p>
+
+                    <div class="results-metrics mb-4">
+                        <span class="metric">C-Suite trusted</span>
+                        <span class="timeframe">50+ executives coached</span>
+                    </div>
+
+                    <ul class="space-y-1 text-sm font-light text-gray-500">
+                        <li>Digital transformation roadmaps</li>
+                        <li>Executive workshops and capability building</li>
+                        <li>Strategic design system implementation</li>
+                    </ul>
+                </article>
+
+                <!-- Project Management -->
+                <article class="lg:col-span-2 bg-gray-50 rounded-lg p-6 service-card enhanced-hover reveal delay-3" data-service="project-management">
+                    <div class="service-icon w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-tasks text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-serif mb-3">Project Management</h3>
+                    <p class="text-sm font-light text-gray-600 leading-relaxed mb-3">Strategic oversight and execution with precision timing.</p>
+                    <div class="text-xs text-yellow-600 font-medium">On-time delivery guaranteed</div>
+                </article>
+
+                <!-- Workshops -->
+                <article class="bg-gray-50 rounded-lg p-6 service-card enhanced-hover reveal delay-4" data-service="workshops">
+                    <div class="service-icon w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chalkboard-teacher text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-serif mb-3">Workshops</h3>
+                    <p class="text-sm font-light text-gray-600 leading-relaxed mb-2">Collaborative strategy sessions.</p>
+                    <div class="text-xs text-yellow-600 font-medium">Team alignment achieved</div>
+                </article>
+            </div>
+
+            <!-- Client Partnerships -->
+            <div class="py-20 content-segment reveal">
+                <header class="text-center mb-12">
+                    <h3 class="text-sm font-light text-gray-500 uppercase tracking-wide mb-4">Trusted by industry leaders</h3>
+                </header>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-60">
+                    <!-- Row 1 -->
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-xl font-serif font-bold text-gray-400">ATLASSIAN</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-lg font-sans font-semibold text-gray-400">HubSpot</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-xl font-sans font-bold text-gray-400">Zendesk</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-lg font-serif text-gray-400">monday.com</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-xl font-sans font-bold text-gray-400">Canva</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-lg font-serif text-gray-400">Shopify</div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-lg font-sans font-semibold text-gray-400">Airtable</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-xl font-serif text-gray-400">Notion</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-lg font-sans font-bold text-gray-400">Stripe</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-xl font-sans font-semibold text-gray-400">Figma</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-lg font-serif text-gray-400">Linear</div>
+                    </div>
+                    <div class="flex items-center justify-center h-12 stroke-interactive p-4 rounded-lg">
+                        <div class="text-xl font-sans font-bold text-gray-400">Vercel</div>
+                    </div>
+                </div>
+
+                <!-- Partnership Note -->
+                <div class="text-center mt-12">
+                    <div class="layer-elevated p-6 rounded-lg max-w-2xl mx-auto">
+                        <p class="text-sm font-light text-gray-500">
+                            Strategic partnerships and consulting engagements across SaaS, fintech, and digital transformation initiatives.
+                            <span class="font-medium text-gray-700">150+ projects delivered</span> with measurable business impact and
+                            <span class="font-medium text-gray-700">98% client satisfaction rate</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="py-32 bg-gray-50">
+        <div class="container-centered">
+            <header class="text-center mb-20 reveal">
+                <h2 class="text-5xl font-serif font-light mb-4">Strategic process</h2>
+                <p class="text-lg font-light text-gray-600 max-w-2xl mx-auto">A tailored approach for each engagement, built on proven methodologies</p>
+            </header>
+
+            <div class="grid md:grid-cols-3 gap-8 reveal delay-1 mb-16">
+                <div class="bg-white p-8 rounded-xl layer-floating">
+                    <div class="text-4xl font-serif mb-4 text-yellow-400">1</div>
+                    <h3 class="text-xl font-serif mb-3">Discovery</h3>
+                    <p class="text-gray-600 mb-4">Deep dive into your business context, user needs, and market opportunities through research and stakeholder interviews.</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Stakeholder workshops</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>User research & analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Competitive landscape</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl layer-floating">
+                    <div class="text-4xl font-serif mb-4 text-yellow-400">2</div>
+                    <h3 class="text-xl font-serif mb-3">Strategy</h3>
+                    <p class="text-gray-600 mb-4">Developing a clear roadmap that aligns business objectives with user needs and technical feasibility.</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Opportunity mapping</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Experience architecture</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Success metrics</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl layer-floating">
+                    <div class="text-4xl font-serif mb-4 text-yellow-400">3</div>
+                    <h3 class="text-xl font-serif mb-3">Execution</h3>
+                    <p class="text-gray-600 mb-4">Bringing the strategy to life through iterative design, development, and continuous optimization.</p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Prototyping & testing</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Agile development</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>Performance tracking</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Process Preview -->
+            <div class="process-preview reveal delay-2">
+                <h3>What happens next?</h3>
+                <ol>
+                    <li>Free 30-minute discovery call within 24 hours</li>
+                    <li>Custom strategy proposal within 48 hours</li>
+                    <li>Project kickoff within 1 week</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-32">
+        <div class="container-centered max-w-4xl mx-auto">
+            <header class="text-center mb-16 reveal">
+                <h2 class="text-5xl font-serif font-light mb-4">Frequently asked questions</h2>
+                <p class="text-lg font-light text-gray-600">Everything you need to know about working together</p>
+            </header>
+
+            <div class="faq-section reveal delay-1">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How quickly can we see results?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Most clients see initial improvements within 30 days, with significant results (40%+ conversion increases) typically achieved within 90 days. Quick wins are implemented immediately, while strategic transformations show measurable impact within the first quarter.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What's included in the strategy consultation?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            The free 30-minute consultation includes a comprehensive audit of your current digital presence, identification of immediate opportunities, and a custom strategy roadmap. You'll receive actionable insights regardless of whether we work together.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you work with companies of all sizes?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            I specialize in working with ambitious businesses ready to invest in strategic growth. Whether you're a startup scaling rapidly or an enterprise transforming digitally, the focus is on companies committed to measurable outcomes and long-term success.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What's your approach to measuring success?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Every project begins with defining clear success metrics aligned with your business goals. We track conversion rates, user engagement, revenue impact, and other KPIs specific to your industry. Regular reporting ensures transparency and accountability.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can you work with our existing team?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely. I often work as an extension of existing teams, providing strategic guidance while collaborating with your developers, designers, and marketers. Knowledge transfer and capability building are integral parts of every engagement.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="insights" class="py-32 bg-gray-50">
+        <div class="container-centered">
+            <header class="text-center mb-20 reveal">
+                <h2 class="text-5xl font-serif font-light mb-4">Recent insights</h2>
+                <p class="text-lg font-light text-gray-600 max-w-2xl mx-auto">Thoughts on digital strategy, design, and business transformation</p>
+            </header>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal delay-1">
+                <article class="bg-white rounded-xl overflow-hidden layer-floating">
+                    <div class="h-48 bg-gradient-to-br from-yellow-400 to-yellow-600"></div>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">May 12, 2024</div>
+                        <h3 class="text-xl font-serif mb-3">The ROI of Strategic UX</h3>
+                        <p class="text-gray-600 mb-4">How strategic UX investment delivers measurable business outcomes, with real case studies showing 250%+ ROI increases.</p>
+                        <a href="#" class="text-sm font-medium text-yellow-600 hover:text-yellow-800 transition-colors">Read more →</a>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-xl overflow-hidden layer-floating">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600"></div>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">April 28, 2024</div>
+                        <h3 class="text-xl font-serif mb-3">Measuring Design Impact</h3>
+                        <p class="text-gray-600 mb-4">Quantifying the business impact of design decisions and strategic UX investments through proven frameworks.</p>
+                        <a href="#" class="text-sm font-medium text-yellow-600 hover:text-yellow-800 transition-colors">Read more →</a>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-xl overflow-hidden layer-floating">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-green-600"></div>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">March 15, 2024</div>
+                        <h3 class="text-xl font-serif mb-3">Conversion Psychology</h3>
+                        <p class="text-gray-600 mb-4">Understanding the psychological principles that drive user behavior and how to apply them ethically for business growth.</p>
+                        <a href="#" class="text-sm font-medium text-yellow-600 hover:text-yellow-800 transition-colors">Read more →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 bg-gray-50">
+        <div class="container-centered max-w-4xl mx-auto text-center">
+            <header class="mb-16">
+                <h2 class="text-5xl font-serif font-light mb-8 reveal">Let's work together</h2>
+                <p class="text-xl font-light text-gray-600 mb-10 reveal delay-1">Ready to transform your digital presence?</p>
+            </header>
+
+            <div class="reveal delay-2">
+                <a href="mailto:hello@nathanstower.com" class="btn-primary-enhanced focus-ring">
+                    <span>hello@nathanstower.com</span>
+                    <span class="cta-subtext">Response within 24 hours</span>
+                </a>
+                <div class="social-proof-inline justify-center mt-6">
+                    <div class="text-sm font-light text-gray-500">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <span class="ml-2">4.9/5 client satisfaction</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-left reveal delay-3">
+                <div class="p-6 bg-white rounded-lg layer-elevated">
+                    <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-map-marker-alt text-yellow-600"></i>
+                    </div>
+                    <h3 class="font-medium mb-2">Location</h3>
+                    <p class="text-gray-600">Brisbane, Australia<br>
+                    <span class="text-sm text-gray-500">Serving clients globally</span></p>
+                </div>
+
+                <div class="p-6 bg-white rounded-lg layer-elevated">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-clock text-blue-600"></i>
+                    </div>
+                    <h3 class="font-medium mb-2">Availability</h3>
+                    <p class="text-gray-600">Monday - Friday<br>
+                    <span class="text-sm text-gray-500">9AM - 5PM AEST</span></p>
+                </div>
+
+                <div class="p-6 bg-white rounded-lg layer-elevated">
+                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-calendar-check text-green-600"></i>
+                    </div>
+                    <h3 class="font-medium mb-2">Next availability</h3>
+                    <p class="text-gray-600">June 2024<br>
+                    <span class="text-sm text-green-600 font-medium">2 spots remaining</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 border-t border-minimal" role="contentinfo">
+        <div class="container-centered flex flex-col md:flex-row justify-between items-center text-sm font-light text-gray-500">
+            <p>© 2024 Nathan Stower. All rights reserved.</p>
+            <div class="flex items-center space-x-6 mt-4 md:mt-0">
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors focus-ring">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
